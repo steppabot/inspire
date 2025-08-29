@@ -10,7 +10,12 @@
   <style>
     :root { --bg:#0b0b0d; --card:#121216; --muted:#a4a7ac; --accent:#1f3e26; }
     html { scroll-behavior:smooth; }
-    body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background:var(--bg); color:#fff; }
+    body {
+      font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      /* Subtle page gradient */
+      background: linear-gradient(180deg, #000000 0%, #1f3e26 100%);
+      color:#fff;
+    }
     .title { font-family: "League Spartan", Inter, sans-serif; }
     .grain { position:relative; }
     .grain::after { content:""; position:absolute; inset:0; pointer-events:none; opacity:.06; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>'); mix-blend-mode:soft-light; }
@@ -21,7 +26,7 @@
 <body class="antialiased">
   <!-- Sticky mobile Book CTA -->
   <div class="fixed bottom-0 left-0 right-0 z-50 md:hidden">
-    <a href="#team" class="block text-center py-3 bg-[var(--accent)] text-black font-semibold">Book Now</a>
+    <a href="#team" class="block text-center py-3 bg-[var(--accent)] text-[#fcf8e6] font-semibold">Book Now</a>
   </div>
 
   <!-- HERO with floating nav; hero image already contains the wordmark -->
@@ -44,7 +49,7 @@
       <a href="#team" class="hover:text-white font-semibold">book now</a>
     </nav>
 
-    <!-- Spacer only (removed big INSPIRE/HAIR STUDIO overlay text) -->
+    <!-- Spacer only (no overlay text) -->
     <div class="relative mx-auto max-w-7xl px-4 pt-24 md:pt-28"></div>
 
     <!-- Scroll cue -->
@@ -68,7 +73,7 @@
               <h3 class="font-semibold text-lg">Fernando</h3>
               <p class="text-sm text-[var(--muted)]">Fades • Beard design • Razor finishes</p>
             </div>
-            <a href="BARBER_BOOK_URL_FERNANDO" class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-black font-semibold">Book</a>
+            <a href="BARBER_BOOK_URL_FERNANDO" class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-[#fcf8e6] font-semibold">Book</a>
           </div>
           <details class="mt-4 group">
             <summary class="cursor-pointer select-none flex items-center justify-between py-2">
@@ -83,7 +88,6 @@
                 </div>
                 <span class="mt-0.5 text-white/90">$90</span>
               </li>
-            
               <li class="flex items-start justify-between">
                 <div>
                   <div class="font-medium">Haircut &amp; Beard</div>
@@ -105,7 +109,7 @@
               <h3 class="font-semibold text-lg">Issac</h3>
               <p class="text-sm text-[var(--muted)]">Shears • Tapers • Long hair</p>
             </div>
-            <a href="BARBER_BOOK_URL_ISSAC" class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-black font-semibold">Book</a>
+            <a href="BARBER_BOOK_URL_ISSAC" class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-[#fcf8e6] font-semibold">Book</a>
           </div>
           <details class="mt-4 group">
             <summary class="cursor-pointer select-none flex items-center justify-between py-2">
@@ -130,7 +134,7 @@
               <h3 class="font-semibold text-lg">Jovani</h3>
               <p class="text-sm text-[var(--muted)]">Designs • Razor work • Detail fades</p>
             </div>
-            <a href="BARBER_BOOK_URL_JOVANI" class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-black font-semibold">Book</a>
+            <a href="BARBER_BOOK_URL_JOVANI" class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-[#fcf8e6] font-semibold">Book</a>
           </div>
           <details class="mt-4 group">
             <summary class="cursor-pointer select-none flex items-center justify-between py-2">
@@ -148,14 +152,14 @@
 
       <!-- Junior -->
       <article class="rounded-2xl bg-[var(--card)] ring-1 ring-white/10 overflow-hidden">
-        <img src="images/inspirehairstuidiojunior.jpg" alt="Junior — Inspire Hair Studio" class="h-56 w-full object-cover" />
+        <img src="images/inspirehairstuidiojunior.png" alt="Junior — Inspire Hair Studio" class="h-56 w-full object-cover" />
         <div class="p-5">
           <div class="flex items-start justify-between gap-3">
             <div>
               <h3 class="font-semibold text-lg">Junior</h3>
               <p class="text-sm text-[var(--muted)]">Classic cuts • Tapers • Beards</p>
             </div>
-            <a href="BARBER_BOOK_URL_JUNIOR" class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-black font-semibold">Book</a>
+            <a href="BARBER_BOOK_URL_JUNIOR" class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-[#fcf8e6] font-semibold">Book</a>
           </div>
           <details class="mt-4 group">
             <summary class="cursor-pointer select-none flex items-center justify-between py-2">
@@ -194,8 +198,8 @@
         <a class="shrink-0 snap-start"><img src="images/ig6.png" alt="Cut" class="h-72 w-72 object-cover rounded-xl"></a>
       </div>
       <div class="pointer-events-none absolute inset-y-0 left-0 right-0 flex items-center justify-between">
-        <button onclick="scrollByCard('igCarousel',-1)" class="pointer-events-auto ml-[-8px] rounded-full bg-black/40 px-3 py-2 ring-1 ring-white/20">‹</button>
-        <button onclick="scrollByCard('igCarousel',1)" class="pointer-events-auto mr-[-8px] rounded-full bg-black/40 px-3 py-2 ring-1 ring-white/20">›</button>
+        <button onclick="scrollByCard('igCarousel',-1)" class="pointer-events-auto ml-[-8px] rounded-full bg-black/40 px-3 py-2 ring-1 ring-white/20 text-[#fcf8e6]">‹</button>
+        <button onclick="scrollByCard('igCarousel',1)" class="pointer-events-auto mr-[-8px] rounded-full bg-black/40 px-3 py-2 ring-1 ring-white/20 text-[#fcf8e6]">›</button>
       </div>
     </div>
   </section>
@@ -213,8 +217,8 @@
         <blockquote class="shrink-0 snap-start w-[85%] md:w-[45%] rounded-2xl bg-[var(--card)] ring-1 ring-white/10 p-6"><p>“Booking is easy and the results are consistent. 10/10.”</p><span class="block mt-3 text-sm text-[var(--muted)]">— K.S.</span></blockquote>
       </div>
       <div class="pointer-events-none absolute inset-y-0 left-0 right-0 flex items-center justify-between">
-        <button onclick="scrollByCard('revCarousel',-1)" class="pointer-events-auto ml-[-8px] rounded-full bg-black/40 px-3 py-2 ring-1 ring-white/20">‹</button>
-        <button onclick="scrollByCard('revCarousel',1)" class="pointer-events-auto mr-[-8px] rounded-full bg-black/40 px-3 py-2 ring-1 ring-white/20">›</button>
+        <button onclick="scrollByCard('revCarousel',-1)" class="pointer-events-auto ml-[-8px] rounded-full bg-black/40 px-3 py-2 ring-1 ring-white/20 text-[#fcf8e6]">‹</button>
+        <button onclick="scrollByCard('revCarousel',1)" class="pointer-events-auto mr-[-8px] rounded-full bg-black/40 px-3 py-2 ring-1 ring-white/20 text-[#fcf8e6]">›</button>
       </div>
       <div class="mt-6"><a href="YOUR_GOOGLE_REVIEWS_URL" class="text-[var(--accent)] hover:underline">See more on Google</a></div>
     </div>
@@ -242,7 +246,7 @@
       <input type="email" name="email" required placeholder="Email" class="rounded-xl bg-[var(--card)] ring-1 ring-white/10 px-4 py-3" />
       <input name="phone" placeholder="Phone (optional)" class="rounded-xl bg-[var(--card)] ring-1 ring-white/10 px-4 py-3 md:col-span-2" />
       <textarea name="message" required placeholder="How can we help?" rows="5" class="rounded-xl bg-[var(--card)] ring-1 ring-white/10 px-4 py-3 md:col-span-2"></textarea>
-      <button class="md:col-span-2 inline-flex items-center justify-center rounded-xl bg-[var(--accent)] px-5 py-3 text-black font-semibold">Send</button>
+      <button class="md:col-span-2 inline-flex items-center justify-center rounded-xl bg-[var(--accent)] px-5 py-3 text-[#fcf8e6] font-semibold">Send</button>
     </form>
     <p class="text-sm text-[var(--muted)] mt-4">Prefer email? <a class="text-[var(--accent)] hover:underline" href="mailto:you@yourdomain">you@yourdomain</a></p>
   </section>
