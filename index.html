@@ -3,92 +3,74 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Inspire Hair Studios | Barber Shop in Sherman, TX</title>
-  <meta name="description" content="Premium barber studio in Sherman, TX. Book online with your preferred barber—each with their own services and pricing." />
+  <title>Inspire Hair Studio | Sherman, TX</title>
+  <meta name="description" content="Inspire Hair Studio in Sherman, TX. Book with our barbers, browse our work, read reviews, find our location, and contact us."/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=League+Spartan:wght@600;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     :root { --bg:#0b0b0d; --card:#121216; --muted:#a4a7ac; --accent:#e0b65a; }
-    body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
+    html { scroll-behavior:smooth; }
+    body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; background:var(--bg); color:#fff; }
     .title { font-family: "League Spartan", Inter, sans-serif; }
-    .grain { position: relative; }
-    .grain::after { content:""; position:absolute; inset:0; pointer-events:none; opacity:.06; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" opacity="1"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>'); mix-blend-mode:soft-light; }
-    .clamp { max-width: 72ch; }
+    .grain { position:relative; }
+    .grain::after { content:""; position:absolute; inset:0; pointer-events:none; opacity:.06; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>'); mix-blend-mode:soft-light; }
     .tag { border:1px solid rgba(255,255,255,.12); padding:.25rem .5rem; border-radius:.5rem; font-size:.75rem; color:#e7e7ea; }
-    details[open] summary .chev { transform: rotate(180deg); }
+    /* simple focus ring */
+    a, button, input, textarea { outline-offset: 2px; }
   </style>
 </head>
-<body class="bg-[var(--bg)] text-white selection:bg-[var(--accent)]/30 antialiased">
-  <!-- Sticky mobile book button (global) -->
+<body class="antialiased">
+  <!-- Sticky mobile Book CTA -->
   <div class="fixed bottom-0 left-0 right-0 z-50 md:hidden">
-    <a href="#team" class="block text-center py-3 bg-[var(--accent)] text-black font-semibold">Book with a Barber</a>
+    <a href="#team" class="block text-center py-3 bg-[var(--accent)] text-black font-semibold">Book Now</a>
   </div>
 
-  <!-- Header -->
-  <header class="grain">
-    <div class="mx-auto max-w-7xl px-4 py-4 flex items-center justify-between">
-      <a href="#" class="flex items-center gap-3">
-        <img src="images/inspirehairstudiomainlogo.png" alt="Inspire Hair Studio logo" class="h-10 w-auto">
-        <span class="title text-xl tracking-wide">Inspire Hair Studios</span>
-      </a>
-      <nav class="hidden md:flex items-center gap-6 text-sm text-[var(--muted)]">
-        <a href="#team" class="hover:text-white">Team & Pricing</a>
-        <a href="#gallery" class="hover:text-white">Gallery</a>
-        <a href="#reviews" class="hover:text-white">Reviews</a>
-        <a href="#location" class="hover:text-white">Location</a>
-        <a href="#team" class="ml-4 inline-flex items-center rounded-xl bg-[var(--accent)] px-4 py-2 text-black font-semibold">Book</a>
-      </nav>
+  <!-- HERO with floating nav + wordmark over client photo -->
+  <section id="top" class="relative h-[88vh] min-h-[560px] overflow-hidden grain">
+    <!-- Background image with gradient for readability -->
+    <div class="absolute inset-0 -z-10">
+      <img src="images/hero.jpg" alt="Three barbers against a minimalist wall at Inspire Hair Studio" class="w-full h-full object-cover" style="object-position:center 30%;"/>
+      <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-transparent"></div>
     </div>
-  </header>
 
-  <!-- Hero (no generic pricing claims) -->
-  <section class="grain relative overflow-hidden">
-    <!-- HERO uses client's image as the focus. Replace local copies in /images/hero.* when you download it. -->
-    <div class="absolute inset-0">
-      <picture>
-        <!-- AVIF first -->
-        <source type="image/avif" srcset="images/hero.avif" />
-        <!-- WebP fallback -->
-        <source type="image/webp" srcset="images/hero.webp" />
-        <!-- JPEG ultimate fallback -->
-        <img src="images/hero.jpg" alt="Inside Inspire Hair Studios — modern chairs and mirrors" class="h-full w-full object-cover opacity-45" style="object-position:center 30%" />
-      </picture>
-      <!-- Gradient overlay for text readability -->
-      <div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/45 to-[var(--bg)]"></div>
+    <!-- Floating nav -->
+    <nav class="absolute inset-x-0 top-6 z-20 flex items-center justify-center gap-8 text-sm text-white/80">
+      <a href="#team" class="hover:text-white">our team</a>
+      <a href="#instagram" class="hover:text-white">gallery</a>
+      <a href="#reviews" class="hover:text-white">reviews</a>
+      <a href="#location" class="hover:text-white">location</a>
+      <a href="#contact" class="hover:text-white">contact</a>
+      <a href="#team" class="hover:text-white font-semibold">book now</a>
+    </nav>
+
+    <!-- Wordmark -->
+    <div class="relative mx-auto max-w-7xl px-4 pt-28 md:pt-32">
+      <img src="images/inspirehairstudiomainlogo.png" alt="Inspire Hair Studio logo" class="h-12 w-auto mb-4 opacity-90 hidden"/>
+      <h1 class="title leading-none tracking-tight" style="font-weight:800; font-size:clamp(56px,10vw,180px);">INSPIRE</h1>
+      <p class="title mt-1 tracking-[0.22em]" style="font-size:clamp(16px,2.4vw,44px); font-weight:600;">HAIR STUDIO</p>
     </div>
-    <div class="relative mx-auto max-w-7xl px-4 pt-24 pb-28">
-      <div class="max-w-2xl">
-        <h1 class="title text-4xl md:text-6xl font-extrabold leading-tight">Sherman’s Premier <span class="text-[var(--accent)]">Barber Studio</span></h1>
-        <p class="mt-5 text-base md:text-lg text-[var(--muted)] clamp">Fades, beard work, and precision cuts in a calm, modern space. Book online—walk out feeling sharp.</p>
-        <div class="mt-7 flex items-center gap-3">
-          <a href="#team" class="inline-flex items-center rounded-xl bg-[var(--accent)] px-5 py-3 text-black font-semibold">Meet the Team</a>
-          <a href="#gallery" class="inline-flex items-center rounded-xl ring-1 ring-white/15 px-5 py-3">See Work</a>
-        </div>
-        <div class="mt-6 text-sm text-[var(--muted)]">201 Sunset Blvd, Sherman, TX • Tue–Sat</div>
-      </div>
-    </div>
+
+    <!-- Scroll cue -->
+    <div class="absolute bottom-6 inset-x-0 flex justify-center text-white/70 text-xs">scroll</div>
   </section>
 
-  <!-- Team & per-barber pricing (accordion per barber) -->
-  <section id="team" class="mx-auto max-w-7xl px-4 py-16">
+  <!-- OUR TEAM -->
+  <section id="team" class="mx-auto max-w-7xl px-4 py-16 scroll-mt-24">
     <header class="mb-8">
-      <h2 class="title text-3xl md:text-4xl">Team & Pricing</h2>
-      <p class="text-[var(--muted)] mt-2 clamp">Transparent menus per barber. Expand a card to see their services, then book directly with them.</p>
+      <h2 class="title text-3xl md:text-4xl">Our Team</h2>
+      <p class="text-[var(--muted)] mt-2">Choose your barber. Each has their own services & pricing.</p>
     </header>
 
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
       <!-- Fernando -->
       <article class="rounded-2xl bg-[var(--card)] ring-1 ring-white/10 overflow-hidden">
-        <img src="images/inspirehairstudiofernando.png" alt="Fernando — Inspire Hair Studio" class="h-56 w-full object-cover" />
+        <img src="images/inspirehairstuidiofernando.png" alt="Fernando — Inspire Hair Studio" class="h-56 w-full object-cover" />
         <div class="p-5">
           <div class="flex items-start justify-between gap-3">
             <div>
               <h3 class="font-semibold text-lg">Fernando</h3>
               <p class="text-sm text-[var(--muted)]">Fades • Beard design • Razor finishes</p>
-              <div class="mt-2 flex flex-wrap gap-2">
-                <span class="tag">Appointments Only</span>
-              </div>
             </div>
             <a href="BARBER_BOOK_URL_FERNANDO" class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-black font-semibold">Book</a>
           </div>
@@ -102,22 +84,18 @@
               <li class="flex items-center justify-between"><span>Skin Fade</span><span class="text-white/90">$45</span></li>
               <li class="flex items-center justify-between"><span>Beard Trim + Line Up</span><span class="text-white/90">$25</span></li>
             </ul>
-            <div class="mt-4 text-xs text-[var(--muted)]">Prices set by the barber. Final total shown during booking.</div>
           </details>
         </div>
       </article>
 
       <!-- Issac -->
       <article class="rounded-2xl bg-[var(--card)] ring-1 ring-white/10 overflow-hidden">
-        <img src="images/inspirehairstudioissac.png" alt="Issac — Inspire Hair Studio" class="h-56 w-full object-cover" />
+        <img src="images/inspirehairstuidioissac.png" alt="Issac — Inspire Hair Studio" class="h-56 w-full object-cover" />
         <div class="p-5">
           <div class="flex items-start justify-between gap-3">
             <div>
               <h3 class="font-semibold text-lg">Issac</h3>
               <p class="text-sm text-[var(--muted)]">Shears • Tapers • Long hair</p>
-              <div class="mt-2 flex flex-wrap gap-2">
-                <span class="tag">Walk‑ins Welcome</span>
-              </div>
             </div>
             <a href="BARBER_BOOK_URL_ISSAC" class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-black font-semibold">Book</a>
           </div>
@@ -127,70 +105,144 @@
               <svg class="chev transition-transform" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </summary>
             <ul class="mt-2 space-y-3 text-sm">
-              <li class="flex items-center justify-between"><span>Scissor Cut</span><s (non‑functional placeholders; wire up later with Alpine.js if desired) -->
-    <div class="mt-8 flex flex-wrap gap-2 text-sm text-[var(--muted)]">
-      <span class="tag">Fades</span>
-      <span class="tag">Beards</span>
-      <span class="tag">Kids</span>
-      <span class="tag">Razor</span>
-      <span class="tag">Walk‑ins</span>
+              <li class="flex items-center justify-between"><span>Scissor Cut</span><span class="text-white/90">$42</span></li>
+              <li class="flex items-center justify-between"><span>Taper + Shears</span><span class="text-white/90">$48</span></li>
+              <li class="flex items-center justify-between"><span>Beard & Hot Towel</span><span class="text-white/90">$28</span></li>
+            </ul>
+          </details>
+        </div>
+      </article>
+
+      <!-- Jovani -->
+      <article class="rounded-2xl bg-[var(--card)] ring-1 ring-white/10 overflow-hidden">
+        <img src="images/inspirehairstuidiojovani.png" alt="Jovani — Inspire Hair Studio" class="h-56 w-full object-cover" />
+        <div class="p-5">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <h3 class="font-semibold text-lg">Jovani</h3>
+              <p class="text-sm text-[var(--muted)]">Designs • Razor work • Detail fades</p>
+            </div>
+            <a href="BARBER_BOOK_URL_JOVANI" class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-black font-semibold">Book</a>
+          </div>
+          <details class="mt-4 group">
+            <summary class="cursor-pointer select-none flex items-center justify-between py-2">
+              <span class="font-semibold">Services & Pricing</span>
+              <svg class="chev transition-transform" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </summary>
+            <ul class="mt-2 space-y-3 text-sm">
+              <li class="flex items-center justify-between"><span>Signature Cut</span><span class="text-white/90">$40</span></li>
+              <li class="flex items-center justify-between"><span>Razor Fade</span><span class="text-white/90">$50</span></li>
+              <li class="flex items-center justify-between"><span>Beard Sculpt</span><span class="text-white/90">$30</span></li>
+            </ul>
+          </details>
+        </div>
+      </article>
+
+      <!-- Junior -->
+      <article class="rounded-2xl bg-[var(--card)] ring-1 ring-white/10 overflow-hidden">
+        <img src="images/inspirehairstudiojunior.jpg" alt="Junior — Inspire Hair Studio" class="h-56 w-full object-cover" />
+        <div class="p-5">
+          <div class="flex items-start justify-between gap-3">
+            <div>
+              <h3 class="font-semibold text-lg">Junior</h3>
+              <p class="text-sm text-[var(--muted)]">Classic cuts • Tapers • Beards</p>
+            </div>
+            <a href="BARBER_BOOK_URL_JUNIOR" class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-black font-semibold">Book</a>
+          </div>
+          <details class="mt-4 group">
+            <summary class="cursor-pointer select-none flex items-center justify-between py-2">
+              <span class="font-semibold">Services & Pricing</span>
+              <svg class="chev transition-transform" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            </summary>
+            <ul class="mt-2 space-y-3 text-sm">
+              <li class="flex items-center justify-between"><span>Signature Cut</span><span class="text-white/90">$38</span></li>
+              <li class="flex items-center justify-between"><span>Fade</span><span class="text-white/90">$45</span></li>
+              <li class="flex items-center justify-between"><span>Beard Trim</span><span class="text-white/90">$22</span></li>
+            </ul>
+          </details>
+        </div>
+      </article>
     </div>
   </section>
 
-  <!-- Reviews -->
-  <section id="reviews" class="mx-auto max-w-7xl px-4 py-16">
-    <header class="mb-8">
-      <h2 class="title text-3xl md:text-4xl">Client Reviews</h2>
-      <p class="text-[var(--muted)] mt-2">Real results, real people.</p>
+  <!-- INSTAGRAM (carousel via CSS scroll-snap + arrows) -->
+  <section id="instagram" class="mx-auto max-w-7xl px-4 py-16 scroll-mt-24">
+    <header class="mb-8 flex items-end justify-between">
+      <div>
+        <h2 class="title text-3xl md:text-4xl">Gallery</h2>
+        <p class="text-[var(--muted)] mt-2">From our Instagram.</p>
+      </div>
+      <a href="https://instagram.com/YOUR_HANDLE" class="text-[var(--accent)] hover:underline">@YOUR_HANDLE</a>
     </header>
-    <div class="grid md:grid-cols-3 gap-6">
-      <blockquote class="rounded-2xl bg-[var(--card)] ring-1 ring-white/10 p-6">
-        <p>“Best fade I’ve had in years. Attention to detail is crazy.”</p>
-        <span class="block mt-3 text-sm text-[var(--muted)]">— A.G.</span>
-      </blockquote>
-      <blockquote class="rounded-2xl bg-[var(--card)] ring-1 ring-white/10 p-6">
-        <p>“Clean studio, on time, and the beard lineup is perfect.”</p>
-        <span class="block mt-3 text-sm text-[var(--muted)]">— R.M.</span>
-      </blockquote>
-      <blockquote class="rounded-2xl bg-[var(--card)] ring-1 ring-white/10 p-6">
-        <p>“Booking is easy and the results are consistent. 10/10.”</p>
-        <span class="block mt-3 text-sm text-[var(--muted)]">— K.S.</span>
-      </blockquote>
-    </div>
-    <div class="mt-6">
-      <a href="YOUR_GOOGLE_REVIEWS_URL" class="text-[var(--accent)] hover:underline">See more on Google</a>
+    <div class="relative">
+      <div id="igCarousel" class="flex gap-3 overflow-x-auto scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none]" style="scrollbar-width:none;">
+        <style>#igCarousel::-webkit-scrollbar{display:none}</style>
+        <!-- Drop in 1:1 or 4:5 images -->
+        <a class="shrink-0 snap-start"><img src="images/ig1.png" alt="Cut" class="h-72 w-72 object-cover rounded-xl"></a>
+        <a class="shrink-0 snap-start"><img src="images/ig2.png" alt="Cut" class="h-72 w-72 object-cover rounded-xl"></a>
+        <a class="shrink-0 snap-start"><img src="images/ig3.png" alt="Cut" class="h-72 w-72 object-cover rounded-xl"></a>
+        <a class="shrink-0 snap-start"><img src="images/ig4.png" alt="Cut" class="h-72 w-72 object-cover rounded-xl"></a>
+        <a class="shrink-0 snap-start"><img src="images/ig5.png" alt="Cut" class="h-72 w-72 object-cover rounded-xl"></a>
+        <a class="shrink-0 snap-start"><img src="images/ig6.png" alt="Cut" class="h-72 w-72 object-cover rounded-xl"></a>
+      </div>
+      <div class="pointer-events-none absolute inset-y-0 left-0 right-0 flex items-center justify-between">
+        <button onclick="scrollByCard('igCarousel',-1)" class="pointer-events-auto ml-[-8px] rounded-full bg-black/40 px-3 py-2 ring-1 ring-white/20">‹</button>
+        <button onclick="scrollByCard('igCarousel',1)" class="pointer-events-auto mr-[-8px] rounded-full bg-black/40 px-3 py-2 ring-1 ring-white/20">›</button>
+      </div>
     </div>
   </section>
 
-  <!-- Gallery -->
-  <section id="gallery" class="mx-auto max-w-7xl px-4 py-16">
+  <!-- REVIEWS carousel -->
+  <section id="reviews" class="mx-auto max-w-7xl px-4 py-16 scroll-mt-24">
     <header class="mb-8">
-      <h2 class="title text-3xl md:text-4xl">Gallery</h2>
+      <h2 class="title text-3xl md:text-4xl">Reviews</h2>
+      <p class="text-[var(--muted)] mt-2">What clients are saying.</p>
     </header>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
-      <img src="images/g1.webp" alt="Fade" class="aspect-square object-cover rounded-xl">
-      <img src="images/g2.webp" alt="Beard" class="aspect-square object-cover rounded-xl">
-      <img src="images/g3.webp" alt="Design" class="aspect-square object-cover rounded-xl">
-      <img src="images/g4.webp" alt="Cut" class="aspect-square object-cover rounded-xl">
+    <div class="relative">
+      <div id="revCarousel" class="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory [scrollbar-width:none]"><style>#revCarousel::-webkit-scrollbar{display:none}</style>
+        <blockquote class="shrink-0 snap-start w-[85%] md:w-[45%] rounded-2xl bg-[var(--card)] ring-1 ring-white/10 p-6"><p>“Best fade I’ve had in years. Attention to detail is crazy.”</p><span class="block mt-3 text-sm text-[var(--muted)]">— A.G.</span></blockquote>
+        <blockquote class="shrink-0 snap-start w-[85%] md:w-[45%] rounded-2xl bg-[var(--card)] ring-1 ring-white/10 p-6"><p>“Clean studio, on time, and the beard lineup is perfect.”</p><span class="block mt-3 text-sm text-[var(--muted)]">— R.M.</span></blockquote>
+        <blockquote class="shrink-0 snap-start w-[85%] md:w-[45%] rounded-2xl bg-[var(--card)] ring-1 ring-white/10 p-6"><p>“Booking is easy and the results are consistent. 10/10.”</p><span class="block mt-3 text-sm text-[var(--muted)]">— K.S.</span></blockquote>
+      </div>
+      <div class="pointer-events-none absolute inset-y-0 left-0 right-0 flex items-center justify-between">
+        <button onclick="scrollByCard('revCarousel',-1)" class="pointer-events-auto ml-[-8px] rounded-full bg-black/40 px-3 py-2 ring-1 ring-white/20">‹</button>
+        <button onclick="scrollByCard('revCarousel',1)" class="pointer-events-auto mr-[-8px] rounded-full bg-black/40 px-3 py-2 ring-1 ring-white/20">›</button>
+      </div>
+      <div class="mt-6"><a href="YOUR_GOOGLE_REVIEWS_URL" class="text-[var(--accent)] hover:underline">See more on Google</a></div>
     </div>
   </section>
 
-  <!-- Location & Hours -->
-  <section id="location" class="mx-auto max-w-7xl px-4 py-16">
+  <!-- LOCATION -->
+  <section id="location" class="mx-auto max-w-7xl px-4 py-16 scroll-mt-24">
     <header class="mb-8">
-      <h2 class="title text-3xl md:text-4xl">Find Us</h2>
-      <p class="text-[var(--muted)] mt-2">201 Sunset Blvd, Sherman, TX 75092</p>
-      <p class="text-[var(--muted)]">Tue–Sat • Parking available</p>
+      <h2 class="title text-3xl md:text-4xl">Location</h2>
+      <p class="text-[var(--muted)] mt-2">201 Sunset Blvd, Sherman, TX 75092 — Tue–Sat</p>
     </header>
     <div class="rounded-2xl overflow-hidden ring-1 ring-white/10">
       <iframe src="https://www.google.com/maps?q=201%20Sunset%20Blvd%20Sherman%20TX%2075092&output=embed" class="w-full h-[380px]" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
     </div>
   </section>
 
+  <!-- CONTACT -->
+  <section id="contact" class="mx-auto max-w-7xl px-4 py-16 scroll-mt-24">
+    <header class="mb-8">
+      <h2 class="title text-3xl md:text-4xl">Contact Us</h2>
+      <p class="text-[var(--muted)] mt-2">General questions? Send a note—we’ll get back quickly.</p>
+    </header>
+    <form class="grid md:grid-cols-2 gap-4 max-w-3xl" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+      <input name="name" required placeholder="Your name" class="rounded-xl bg-[var(--card)] ring-1 ring-white/10 px-4 py-3" />
+      <input type="email" name="email" required placeholder="Email" class="rounded-xl bg-[var(--card)] ring-1 ring-white/10 px-4 py-3" />
+      <input name="phone" placeholder="Phone (optional)" class="rounded-xl bg-[var(--card)] ring-1 ring-white/10 px-4 py-3 md:col-span-2" />
+      <textarea name="message" required placeholder="How can we help?" rows="5" class="rounded-xl bg-[var(--card)] ring-1 ring-white/10 px-4 py-3 md:col-span-2"></textarea>
+      <button class="md:col-span-2 inline-flex items-center justify-center rounded-xl bg-[var(--accent)] px-5 py-3 text-black font-semibold">Send</button>
+    </form>
+    <p class="text-sm text-[var(--muted)] mt-4">Prefer email? <a class="text-[var(--accent)] hover:underline" href="mailto:you@yourdomain">you@yourdomain</a></p>
+  </section>
+
   <!-- Footer -->
   <footer class="mt-16 border-t border-white/10">
     <div class="mx-auto max-w-7xl px-4 py-10 flex flex-col md:flex-row items-center justify-between gap-4">
-      <p class="text-sm text-[var(--muted)]">&copy; <span id="y"></span> Inspire Hair Studios. All rights reserved.</p>
+      <p class="text-sm text-[var(--muted)]">&copy; <span id="y"></span> Inspire Hair Studio. All rights reserved.</p>
       <div class="flex items-center gap-4 text-sm text-[var(--muted)]">
         <a href="https://instagram.com/YOUR_HANDLE" aria-label="Instagram">Instagram</a>
         <a href="https://facebook.com/YOUR_PAGE" aria-label="Facebook">Facebook</a>
@@ -200,20 +252,12 @@
     </div>
   </footer>
 
-  <!-- LocalBusiness Schema (no generic prices) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Barbershop",
-    "name": "Inspire Hair Studios",
-    "image": "https://YOUR_DOMAIN/images/og.jpg",
-    "address": { "@type": "PostalAddress", "streetAddress": "201 Sunset Blvd", "addressLocality": "Sherman", "addressRegion": "TX", "postalCode": "75092", "addressCountry": "US" },
-    "url": "https://YOUR_DOMAIN/",
-    "telephone": "+1-XXX-XXX-XXXX",
-    "openingHours": "Tu-Sa 10:00-19:00",
-    "sameAs": ["https://instagram.com/YOUR_HANDLE","https://facebook.com/YOUR_PAGE"]
-  }
+  <script>
+    function scrollByCard(id, dir){
+      const el = document.getElementById(id);
+      el && el.scrollBy({ left: dir * el.clientWidth * 0.9, behavior: 'smooth' });
+    }
+    document.getElementById('y').textContent = new Date().getFullYear();
   </script>
-  <script>document.getElementById('y').textContent = new Date().getFullYear()</script>
 </body>
 </html>
