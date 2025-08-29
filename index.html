@@ -25,53 +25,80 @@
     
     :root { --bg:#0b0b0d; --card:#121216; --muted:#a4a7ac; --accent:#1f3e26; }
     html { scroll-behavior:smooth; }
-    /* Veil-style colored ring + glow */
-    /* Veil-style strong ring + halo that reads on black */
+
     .barber-card{
       position: relative;
-      isolation: isolate;                 /* keeps glow behind content */
+      isolation: isolate;                     /* keeps glow behind content */
       background: var(--card);
-      border-radius: 1rem;                /* = rounded-2xl */
+      border-radius: 1rem;                    /* = rounded-2xl */
       box-shadow:
-        0 0 0 1px rgba(255,255,255,.10),  /* base subtle border */
-        0 0 0 0 rgba(13,83,23,0);         /* placeholder layer */
+        0 0 0 1px rgba(255,255,255,.10),
+        0 0 0 0 rgba(13,83,23,0);
       transition: box-shadow .28s ease, transform .2s ease;
     }
     
+    /* Luminous halo that follows the cursor (behind card) */
     .barber-card::before{
       content:"";
-      position:absolute; inset:-8px;      /* extend a bit past the card */
+      position:absolute; inset:-8px;
       border-radius: inherit;
       background:
-        radial-gradient(240px 160px at var(--glow-x,50%) var(--glow-y,50%),
-          rgba(13,83,23,.55) 0%,
-          rgba(13,83,23,.28) 35%,
+        radial-gradient(260px 180px at var(--glow-x,50%) var(--glow-y,50%),
+          rgba(13,83,23,.60) 0%,
+          rgba(13,83,23,.32) 35%,
           rgba(13,83,23,0) 70%);
-      filter: blur(24px);
+      filter: blur(34px);
       opacity: 0;
-      z-index: -1;                        /* glow behind the card */
+      z-index: -1;                            /* sit behind card */
       transition: opacity .28s ease, filter .28s ease;
+      pointer-events: none;
+    }
+    
+    /* CRISP ring overlay (on top of the card) */
+    .barber-card::after{
+      content:"";
+      position:absolute; inset:-2px;          /* slightly outside the card */
+      border-radius: inherit;
+      padding: 2px;                           /* ring thickness */
+      background: linear-gradient(135deg,
+                  rgba(13,83,23,.95), rgba(13,83,23,.50));
+      /* Mask trick to show only the 2px ring, not fill */
+      -webkit-mask: 
+         linear-gradient(#000 0 0) content-box, 
+         linear-gradient(#000 0 0);
+      -webkit-mask-composite: xor;
+              mask-composite: exclude;
+      opacity: 0;                             /* hidden until hover */
+      transition: opacity .25s ease;
+      pointer-events: none;
+      z-index: 1;                             /* above content */
     }
     
     .barber-card:hover,
     .barber-card:focus-within{
       box-shadow:
-        0 0 0 2px rgba(13,83,23,.85),     /* crisp green ring */
-        0 10px 34px rgba(13,83,23,.45),   /* mid glow */
-        0 0 120px rgba(13,83,23,.35);     /* wide halo */
+        0 0 0 2px rgba(13,83,23,.90),         /* inner crisp ring */
+        0 10px 38px rgba(13,83,23,.48),       /* mid glow */
+        0 0 140px rgba(13,83,23,.36);         /* wide halo */
       transform: translateY(-2px);
     }
     
     .barber-card:hover::before,
     .barber-card:focus-within::before{
       opacity: 1;
-      filter: blur(36px);
+      filter: blur(40px);
     }
     
-    /* Respect reduced motion */
-    @media (prefers-reduced-motion: reduce){
-      .barber-card, .barber-card::before{ transition: none; }
+    .barber-card:hover::after,
+    .barber-card:focus-within::after{
+      opacity: 1;                             /* show the overlay ring */
     }
+    
+    /* Reduced motion respects users */
+    @media (prefers-reduced-motion: reduce){
+      .barber-card, .barber-card::before, .barber-card::after{ transition: none; }
+    }
+
     .title { font-family: "League Spartan", Inter, sans-serif; }
     .grain { position:relative; }
     .grain::after { content:""; position:absolute; inset:0; pointer-events:none; opacity:.06; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>'); mix-blend-mode:soft-light; }
