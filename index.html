@@ -146,7 +146,7 @@
               <h3 class="font-semibold text-lg">Fernando</h3>
               <p class="text-sm text-[var(--muted)]">Fades • Beard design • Razor finishes</p>
             </div>
-            <a href="BARBER_BOOK_URL_FERNANDO" class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-[#fcf8e6] font-semibold">Book</a>
+            <a data-book="fernando" class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-[#fcf8e6] font-semibold">Book</a>
           </div>
           <details class="mt-4 group">
             <summary class="cursor-pointer select-none flex items-center justify-between py-2">
@@ -182,7 +182,7 @@
               <h3 class="font-semibold text-lg">Issac</h3>
               <p class="text-sm text-[var(--muted)]">Shears • Tapers • Long hair</p>
             </div>
-            <a href="BARBER_BOOK_URL_ISSAC" class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-[#fcf8e6] font-semibold">Book</a>
+            <a data-book="issac"    class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-[#fcf8e6] font-semibold">Book</a>
           </div>
           <details class="mt-4 group">
             <summary class="cursor-pointer select-none flex items-center justify-between py-2">
@@ -207,7 +207,7 @@
               <h3 class="font-semibold text-lg">Jovani</h3>
               <p class="text-sm text-[var(--muted)]">Designs • Razor work • Detail fades</p>
             </div>
-            <a href="BARBER_BOOK_URL_JOVANI" class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-[#fcf8e6] font-semibold">Book</a>
+            <a data-book="jovani"   class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-[#fcf8e6] font-semibold">Book</a>
           </div>
           <details class="mt-4 group">
             <summary class="cursor-pointer select-none flex items-center justify-between py-2">
@@ -232,7 +232,7 @@
               <h3 class="font-semibold text-lg">Junior</h3>
               <p class="text-sm text-[var(--muted)]">Classic cuts • Tapers • Beards</p>
             </div>
-            <a href="BARBER_BOOK_URL_JUNIOR" class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-[#fcf8e6] font-semibold">Book</a>
+            <a data-book="junior"   class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-[#fcf8e6] font-semibold">Book</a>
           </div>
           <details class="mt-4 group">
             <summary class="cursor-pointer select-none flex items-center justify-between py-2">
@@ -355,6 +355,22 @@
       card.style.removeProperty('--glow-x');
       card.style.removeProperty('--glow-y');
     });
+  });
+</script>
+<script>
+  const BOOK = {
+    fernando: 'https://getsquire.com/booking/book/fernandoughfades-sherman/barber/fernando-jimenez-1/services?utm_source=site&utm_medium=book_button&utm_campaign=fernando',
+    issac:    'https://getsquire.com/booking/book/isaac-blends-hutchins/barber/isaac-castillo-1/services?utm_source=site&utm_medium=book_button&utm_campaign=issac',
+    jovani:   'https://headscapestudios.square.site/?utm_source=site&utm_medium=book_button&utm_campaign=jovani',
+    junior:   'https://book.squareup.com/appointments/fwywz2fah3c0rm/location/L5GGFA5P9058F/services?utm_source=site&utm_medium=book_button&utm_campaign=junior'
+  };
+
+  // apply to all Book buttons by data attribute
+  document.querySelectorAll('[data-book]').forEach(btn => {
+    const id = btn.dataset.book;
+    btn.href = BOOK[id];
+    btn.target = '_blank';
+    btn.rel = 'noopener';
   });
 </script>
 </body>
