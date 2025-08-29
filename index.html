@@ -51,22 +51,20 @@
       z-index: 1;                               /* above content */
     }
     
-    /* Hover/focus: zoom + strong bottom glow */
+    /* Compact Veil-style hover: tight glow + small zoom */
     .barber-card:hover,
     .barber-card:focus-within{
-      transform: translateY(-4px) scale(1.055);
-    
-      /* keep a tiny base border so edges stay crisp on dark bg */
+      transform: translateY(-3px) scale(1.035);
+      /* keep a thin base border so edges stay crisp */
       box-shadow: 0 0 0 1px rgba(255,255,255,.08);
-    
-      /* big bottom-biased green halo (outside the frame) */
+      /* bottom-biased, contained halo (short blur, medium opacity) */
       filter:
-        drop-shadow(0 32px 72px rgba(0,153,35,.55))   /* main bloom */
-        drop-shadow(0 76px 160px rgba(0,153,35,.36))  /* wide outer */
-        drop-shadow(0 14px 24px rgba(0,0,0,.50));     /* depth */
+        drop-shadow(0 14px 26px rgba(0,153,35,.42))  /* primary**
+        drop-shadow(0 6px 14px  rgba(0,153,35,.30))  /* mid */
+        drop-shadow(0 3px 6px   rgba(0,0,0,.40));    /* depth */
     }
     
-    /* make sure the ring is visible on hover */
+    /* ensure the solid ring is visible on hover/focus */
     .barber-card:hover::after,
     .barber-card:focus-within::after{
       opacity: 1;
