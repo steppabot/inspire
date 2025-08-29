@@ -1,78 +1,82 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Inspire Hair Studios | Barber Shop in Sherman, TX</title>
-<meta name="description" content="Premium barber studio in Sherman, TX. Book online with your preferred barber—each with their own services and pricing." />
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=League+Spartan:wght@600;800&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<style>
-:root { --bg:#0b0b0d; --card:#121216; --muted:#a4a7ac; --accent:#e0b65a; }
-body { font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif; }
-.title { font-family: "League Spartan", Inter, sans-serif; }
-.grain { position: relative; }
-.grain::after { content:""; position:absolute; inset:0; pointer-events:none; opacity:.06; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" opacity="1"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>'); mix-blend-mode:soft-light; }
-.clamp { max-width: 72ch; }
-.tag { border:1px solid rgba(255,255,255,.12); padding:.25rem .5rem; border-radius:.5rem; font-size:.75rem; color:#e7e7ea; }
-details[open] summary .chev { transform: rotate(180deg); }
-</style>
-</head>
-<body class="bg-[var(--bg)] text-white selection:bg-[var(--accent)]/30 antialiased">
-<!-- Sticky mobile book button (global) -->
-<div class="fixed bottom-0 left-0 right-0 z-50 md:hidden">
-<a href="#team" class="block text-center py-3 bg-[var(--accent)] text-black font-semibold">Book with a Barber</a>
-</div>
-
-
-<!-- Header -->
-<header class="grain">
-<div class="mx-auto max-w-7xl px-4 py-4 flex items-center justify-between">
-<a href="#" class="flex items-center gap-3">
-<img src="images/logo.svg" alt="Inspire Hair Studios" class="h-10 w-10 rounded-xl ring-1 ring-white/10">
-<span class="title text-xl tracking-wide">Inspire Hair Studios</span>
-</a>
-<nav class="hidden md:flex items-center gap-6 text-sm text-[var(--muted)]">
-<a href="#team" class="hover:text-white">Team & Pricing</a>
-<a href="#gallery" class="hover:text-white">Gallery</a>
-<a href="#reviews" class="hover:text-white">Reviews</a>
-<a href="#location" class="hover:text-white">Location</a>
-<a href="#team" class="ml-4 inline-flex items-center rounded-xl bg-[var(--accent)] px-4 py-2 text-black font-semibold">Book</a>
-</nav>
-</div>
+<h2 class="title text-3xl md:text-4xl">Client Reviews</h2>
+<p class="text-[var(--muted)] mt-2">Real results, real people.</p>
 </header>
-
-
-<!-- Hero (no generic pricing claims) -->
-<section class="grain relative overflow-hidden">
-<!-- HERO uses client's image as the focus. Replace local copies in /images/hero.* when you download it. -->
-<div class="absolute inset-0">
-<picture>
-<!-- AVIF first -->
-<source type="image/avif" srcset="images/hero.avif" />
-<!-- WebP fallback -->
-<source type="image/webp" srcset="images/hero.webp" />
-<!-- JPEG ultimate fallback -->
-<img src="images/hero.jpg" alt="Inside Inspire Hair Studios — modern chairs and mirrors" class="h-full w-full object-cover opacity-45" style="object-position:center 30%" />
-</picture>
-<!-- Gradient overlay for text readability -->
-<div class="absolute inset-0 bg-gradient-to-b from-black/70 via-black/45 to-[var(--bg)]"></div>
+<div class="grid md:grid-cols-3 gap-6">
+<blockquote class="rounded-2xl bg-[var(--card)] ring-1 ring-white/10 p-6">
+<p>“Best fade I’ve had in years. Attention to detail is crazy.”</p>
+<span class="block mt-3 text-sm text-[var(--muted)]">— A.G.</span>
+</blockquote>
+<blockquote class="rounded-2xl bg-[var(--card)] ring-1 ring-white/10 p-6">
+<p>“Clean studio, on time, and the beard lineup is perfect.”</p>
+<span class="block mt-3 text-sm text-[var(--muted)]">— R.M.</span>
+</blockquote>
+<blockquote class="rounded-2xl bg-[var(--card)] ring-1 ring-white/10 p-6">
+<p>“Booking is easy and the results are consistent. 10/10.”</p>
+<span class="block mt-3 text-sm text-[var(--muted)]">— K.S.</span>
+</blockquote>
 </div>
-<div class="relative mx-auto max-w-7xl px-4 pt-24 pb-28">
-<div class="max-w-2xl">
-<h1 class="title text-4xl md:text-6xl font-extrabold leading-tight">Sherman’s Premier <span class="text-[var(--accent)]">Barber Studio</span></h1>
-<p class="mt-5 text-base md:text-lg text-[var(--muted)] clamp">Fades, beard work, and precision cuts in a calm, modern space. Book online—walk out feeling sharp.</p>
-<div class="mt-7 flex items-center gap-3">
-<a href="#team" class="inline-flex items-center rounded-xl bg-[var(--accent)] px-5 py-3 text-black font-semibold">Meet the Team</a>
-<a href="#gallery" class="inline-flex items-center rounded-xl ring-1 ring-white/15 px-5 py-3">See Work</a>
-</div>
-<div class="mt-6 text-sm text-[var(--muted)]">201 Sunset Blvd, Sherman, TX • Tue–Sat</div>
-</div>
+<div class="mt-6">
+<a href="YOUR_GOOGLE_REVIEWS_URL" class="text-[var(--accent)] hover:underline">See more on Google</a>
 </div>
 </section>
 
 
-<!-- Team & per-barber pricing (accordion per barber) -->
-<section id="team" class="mx-auto max-w-7xl px-4 py-16">
+<!-- Gallery -->
+<section id="gallery" class="mx-auto max-w-7xl px-4 py-16">
 <header class="mb-8">
+<h2 class="title text-3xl md:text-4xl">Gallery</h2>
+</header>
+<div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+<img src="images/g1.webp" alt="Fade" class="aspect-square object-cover rounded-xl">
+<img src="images/g2.webp" alt="Beard" class="aspect-square object-cover rounded-xl">
+<img src="images/g3.webp" alt="Design" class="aspect-square object-cover rounded-xl">
+<img src="images/g4.webp" alt="Cut" class="aspect-square object-cover rounded-xl">
+</div>
+</section>
+
+
+<!-- Location & Hours -->
+<section id="location" class="mx-auto max-w-7xl px-4 py-16">
+<header class="mb-8">
+<h2 class="title text-3xl md:text-4xl">Find Us</h2>
+<p class="text-[var(--muted)] mt-2">201 Sunset Blvd, Sherman, TX 75092</p>
+<p class="text-[var(--muted)]">Tue–Sat • Parking available</p>
+</header>
+<div class="rounded-2xl overflow-hidden ring-1 ring-white/10">
+<iframe src="https://www.google.com/maps?q=201%20Sunset%20Blvd%20Sherman%20TX%2075092&output=embed" class="w-full h-[380px]" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+</div>
+</section>
+
+
+<!-- Footer -->
+<footer class="mt-16 border-t border-white/10">
+<div class="mx-auto max-w-7xl px-4 py-10 flex flex-col md:flex-row items-center justify-between gap-4">
+<p class="text-sm text-[var(--muted)]">&copy; <span id="y"></span> Inspire Hair Studios. All rights reserved.</p>
+<div class="flex items-center gap-4 text-sm text-[var(--muted)]">
+<a href="https://instagram.com/YOUR_HANDLE" aria-label="Instagram">Instagram</a>
+<a href="https://facebook.com/YOUR_PAGE" aria-label="Facebook">Facebook</a>
+<a href="tel:+1YOURPHONE" aria-label="Call">Call</a>
+<a href="mailto:you@yourdomain" aria-label="Email">Email</a>
+</div>
+</div>
+</footer>
+
+
+<!-- LocalBusiness Schema (no generic prices) -->
+<script type="application/ld+json">
+{
+"@context": "https://schema.org",
+"@type": "Barbershop",
+"name": "Inspire Hair Studios",
+"image": "https://YOUR_DOMAIN/images/og.jpg",
+"address": { "@type": "PostalAddress", "streetAddress": "201 Sunset Blvd", "addressLocality": "Sherman", "addressRegion": "TX", "postalCode": "75092", "addressCountry": "US" },
+"url": "https://YOUR_DOMAIN/",
+"telephone": "+1-XXX-XXX-XXXX",
+"openingHours": "Tu-Sa 10:00-19:00",
+"sameAs": ["https://instagram.com/YOUR_HANDLE","https://facebook.com/YOUR_PAGE"]
+}
+</script>
+<script>document.getElementById('y').textContent = new Date().getFullYear()</script>
+</body>
+</html>
