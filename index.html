@@ -26,23 +26,51 @@
     :root { --bg:#0b0b0d; --card:#121216; --muted:#a4a7ac; --accent:#1f3e26; }
     html { scroll-behavior:smooth; }
     /* Veil-style colored ring + glow */
+    /* Veil-style strong ring + halo that reads on black */
     .barber-card{
+      position: relative;
+      isolation: isolate;                 /* keeps glow behind content */
       background: var(--card);
-      border-radius: 1rem; /* = rounded-2xl */
+      border-radius: 1rem;                /* = rounded-2xl */
       box-shadow:
-        0 0 0 1px rgba(255,255,255,.10),
-        0 0 0 0 rgba(13,83,23,0);          /* start with no green */
+        0 0 0 1px rgba(255,255,255,.10),  /* base subtle border */
+        0 0 0 0 rgba(13,83,23,0);         /* placeholder layer */
       transition: box-shadow .28s ease, transform .2s ease;
+    }
+    
+    .barber-card::before{
+      content:"";
+      position:absolute; inset:-8px;      /* extend a bit past the card */
+      border-radius: inherit;
+      background:
+        radial-gradient(240px 160px at var(--glow-x,50%) var(--glow-y,50%),
+          rgba(13,83,23,.55) 0%,
+          rgba(13,83,23,.28) 35%,
+          rgba(13,83,23,0) 70%);
+      filter: blur(24px);
+      opacity: 0;
+      z-index: -1;                        /* glow behind the card */
+      transition: opacity .28s ease, filter .28s ease;
     }
     
     .barber-card:hover,
     .barber-card:focus-within{
-      /* Stronger ring + soft outer glow in #0d5317 */
       box-shadow:
-        0 0 0 2px rgba(13,83,23,.70),      /* crisp inner ring */
-        0 0 22px rgba(13,83,23,.38),       /* mid glow */
-        0 0 48px rgba(13,83,23,.24);       /* wide glow */
+        0 0 0 2px rgba(13,83,23,.85),     /* crisp green ring */
+        0 10px 34px rgba(13,83,23,.45),   /* mid glow */
+        0 0 120px rgba(13,83,23,.35);     /* wide halo */
       transform: translateY(-2px);
+    }
+    
+    .barber-card:hover::before,
+    .barber-card:focus-within::before{
+      opacity: 1;
+      filter: blur(36px);
+    }
+    
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      .barber-card, .barber-card::before{ transition: none; }
     }
     .title { font-family: "League Spartan", Inter, sans-serif; }
     .grain { position:relative; }
@@ -314,5 +342,18 @@
     }
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
+<script>
+  document.querySelectorAll('.barber-card').forEach(card=>{
+    card.addEventListener('pointermove', e=>{
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--glow-x', ((e.clientX - r.left) / r.width * 100) + '%');
+      card.style.setProperty('--glow-y', ((e.clientY - r.top) / r.height * 100) + '%');
+    });
+    card.addEventListener('pointerleave', ()=>{
+      card.style.removeProperty('--glow-x');
+      card.style.removeProperty('--glow-y');
+    });
+  });
+</script>
 </body>
 </html>
