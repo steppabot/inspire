@@ -94,6 +94,10 @@
         0 10px 24px rgba(13,83,23,.14);  /* soft outer glow */
       transform: translateY(-1px);
     }
+
+    details .chev{ transition: transform .2s ease; }
+    details[open] .chev{ transform: rotate(180deg); }
+
   </style>
 </head>
 <body class="antialiased">
@@ -371,6 +375,17 @@
     btn.href = BOOK[id];
     btn.target = '_blank';
     btn.rel = 'noopener';
+  });
+</script>
+<script>
+  // Accordion: only one Services & Pricing open at a time
+  const cards = document.querySelectorAll('#team details');
+  cards.forEach(d => {
+    d.addEventListener('toggle', () => {
+      if (d.open) {
+        cards.forEach(other => { if (other !== d) other.open = false; });
+      }
+    });
   });
 </script>
 </body>
