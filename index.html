@@ -25,78 +25,57 @@
     
     :root { --bg:#0b0b0d; --card:#121216; --muted:#a4a7ac; --accent:#1f3e26; }
     html { scroll-behavior:smooth; }
-
+    
+    /* Veil-style: crisp ring + outer glow + scale on hover */
     .barber-card{
       position: relative;
-      isolation: isolate;                     /* keeps glow behind content */
+      isolation: isolate;
       background: var(--card);
-      border-radius: 1rem;                    /* = rounded-2xl */
-      box-shadow:
-        0 0 0 1px rgba(255,255,255,.10),
-        0 0 0 0 rgba(13,83,23,0);
-      transition: box-shadow .28s ease, transform .2s ease;
+      border-radius: 1rem;                   /* = rounded-2xl */
+      box-shadow: 0 0 0 1px rgba(255,255,255,.10);   /* subtle base border */
+      transform: translateY(0) scale(1);
+      transform-origin: center;
+      transition: transform .26s ease, box-shadow .26s ease;
+      will-change: transform, box-shadow;
     }
     
-    /* Luminous halo that follows the cursor (behind card) */
-    .barber-card::before{
-      content:"";
-      position:absolute; inset:-8px;
-      border-radius: inherit;
-      background:
-        radial-gradient(260px 180px at var(--glow-x,50%) var(--glow-y,50%),
-          rgba(13,83,23,.60) 0%,
-          rgba(13,83,23,.32) 35%,
-          rgba(13,83,23,0) 70%);
-      filter: blur(34px);
-      opacity: 0;
-      z-index: -1;                            /* sit behind card */
-      transition: opacity .28s ease, filter .28s ease;
-      pointer-events: none;
-    }
-    
-    /* CRISP ring overlay (on top of the card) */
+    /* overlay ring that appears on hover (sits on top of the card) */
     .barber-card::after{
       content:"";
-      position:absolute; inset:-2px;          /* slightly outside the card */
+      position:absolute; inset:-2px;         /* slightly outside the card */
       border-radius: inherit;
       padding: 2px;                           /* ring thickness */
       background: linear-gradient(135deg,
-                  rgba(13,83,23,.95), rgba(13,83,23,.50));
-      /* Mask trick to show only the 2px ring, not fill */
-      -webkit-mask: 
-         linear-gradient(#000 0 0) content-box, 
-         linear-gradient(#000 0 0);
+                  rgba(13,83,23,.98), rgba(13,83,23,.60));
+      -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
       -webkit-mask-composite: xor;
               mask-composite: exclude;
-      opacity: 0;                             /* hidden until hover */
-      transition: opacity .25s ease;
+      opacity: 0;                              /* hidden until hover/focus */
+      transition: opacity .2s ease;
       pointer-events: none;
-      z-index: 1;                             /* above content */
+      z-index: 1;
     }
     
+    /* hover/focus effect: scale + ring + outer glow */
     .barber-card:hover,
     .barber-card:focus-within{
+      transform: translateY(-3px) scale(1.035);
       box-shadow:
-        0 0 0 2px rgba(13,83,23,.90),         /* inner crisp ring */
-        0 10px 38px rgba(13,83,23,.48),       /* mid glow */
-        0 0 140px rgba(13,83,23,.36);         /* wide halo */
-      transform: translateY(-2px);
-    }
-    
-    .barber-card:hover::before,
-    .barber-card:focus-within::before{
-      opacity: 1;
-      filter: blur(40px);
+        0 0 0 2px rgba(13,83,23,.95),         /* crisp inner ring */
+        0 18px 40px rgba(13,83,23,.40),       /* green halo */
+        0 10px 20px rgba(0,0,0,.45);          /* depth on dark bg */
     }
     
     .barber-card:hover::after,
     .barber-card:focus-within::after{
-      opacity: 1;                             /* show the overlay ring */
+      opacity: 1;
     }
     
-    /* Reduced motion respects users */
+    /* respect users who prefer less motion */
     @media (prefers-reduced-motion: reduce){
-      .barber-card, .barber-card::before, .barber-card::after{ transition: none; }
+      .barber-card, .barber-card::after{ transition: none; }
     }
 
     .title { font-family: "League Spartan", Inter, sans-serif; }
