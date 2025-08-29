@@ -23,61 +23,55 @@
       background-attachment: fixed;
     }
     
-    :root { --bg:#0b0b0d; --card:#121216; --muted:#a4a7ac; --accent:#1f3e26; }
+    :root { --bg:#0b0b0d; --card:#121216; --muted:#a4a7ac; --accent:#1f3e26; --ring:#009923; }
     html { scroll-behavior:smooth; }
     
-    /* Veil-style: crisp ring + outer glow + scale on hover */
+    /* Veil-like zoom + strong ring + outer glow (no inner gradient) */
     .barber-card{
       position: relative;
       isolation: isolate;
       background: var(--card);
-      border-radius: 1rem;                   /* = rounded-2xl */
-      box-shadow: 0 0 0 1px rgba(255,255,255,.10);   /* subtle base border */
+      border-radius: 1rem;                      /* = rounded-2xl */
+      box-shadow: 0 0 0 1px rgba(255,255,255,.10);
       transform: translateY(0) scale(1);
       transform-origin: center;
-      transition: transform .26s ease, box-shadow .26s ease;
+      transition: transform .26s ease, box-shadow .26s ease, filter .26s ease;
       will-change: transform, box-shadow;
     }
     
-    /* overlay ring that appears on hover (sits on top of the card) */
+    /* SOLID stroke on top of the card */
     .barber-card::after{
       content:"";
-      position:absolute; inset:-2px;         /* slightly outside the card */
+      position:absolute; inset:0;               /* exactly on the edge */
       border-radius: inherit;
-      padding: 2px;                           /* ring thickness */
-      background: linear-gradient(135deg,
-                  rgba(13,83,23,.98), rgba(13,83,23,.60));
-      -webkit-mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-      -webkit-mask-composite: xor;
-              mask-composite: exclude;
-      opacity: 0;                              /* hidden until hover/focus */
-      transition: opacity .2s ease;
+      border: 3px solid var(--ring);            /* <- #009923 ring */
+      opacity: 0;                               /* off until hover */
+      transition: opacity .22s ease;
       pointer-events: none;
-      z-index: 1;
+      z-index: 1;                               /* above content */
     }
     
-    /* hover/focus effect: scale + ring + outer glow */
+    /* Hover/focus: zoom + glow outside */
     .barber-card:hover,
     .barber-card:focus-within{
-      transform: translateY(-3px) scale(1.035);
+      transform: translateY(-3px) scale(1.045);
+      /* outer green halo + depth shadow (outside the frame) */
       box-shadow:
-        0 0 0 2px rgba(13,83,23,.95),         /* crisp inner ring */
-        0 18px 40px rgba(13,83,23,.40),       /* green halo */
-        0 10px 20px rgba(0,0,0,.45);          /* depth on dark bg */
+        0 0 0 1px rgba(255,255,255,.10),
+        0 18px 44px rgba(0,153,35,.40),
+        0 0 110px rgba(0,153,35,.28),
+        0 12px 22px rgba(0,0,0,.50);
     }
     
     .barber-card:hover::after,
     .barber-card:focus-within::after{
-      opacity: 1;
+      opacity: 1;                               /* show the stroke */
     }
     
-    /* respect users who prefer less motion */
+    /* reduced motion */
     @media (prefers-reduced-motion: reduce){
       .barber-card, .barber-card::after{ transition: none; }
     }
-
     .title { font-family: "League Spartan", Inter, sans-serif; }
     .grain { position:relative; }
     .grain::after { content:""; position:absolute; inset:0; pointer-events:none; opacity:.06; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>'); mix-blend-mode:soft-light; }
