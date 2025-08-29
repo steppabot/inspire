@@ -28,6 +28,21 @@
     .grain::after { content:""; position:absolute; inset:0; pointer-events:none; opacity:.06; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>'); mix-blend-mode:soft-light; }
     .tag { border:1px solid rgba(255,255,255,.12); padding:.25rem .5rem; border-radius:.5rem; font-size:.75rem; color:#e7e7ea; }
     a, button, input, textarea { outline-offset: 2px; }
+    /* Veil-style faint ring around cards */
+    .barber-card{
+      background: var(--card);
+      border-radius: 1rem;               /* matches rounded-2xl */
+      box-shadow: 0 0 0 1px rgba(255,255,255,.10);  /* default subtle border */
+      transition: box-shadow .2s ease, transform .2s ease;
+    }
+    .barber-card:hover,
+    .barber-card:focus-within{
+      /* #0d5317 with 0x44 alpha ≈ 0.27 */
+      box-shadow:
+        0 0 0 2px rgba(13,83,23,.27),    /* the “ring” */
+        0 10px 24px rgba(13,83,23,.14);  /* soft outer glow */
+      transform: translateY(-1px);
+    }
   </style>
 </head>
 <body class="antialiased">
@@ -72,10 +87,7 @@
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
       <!-- Fernando -->
-        <article class="group rounded-2xl bg-[var(--card)] ring-1 ring-white/10 overflow-hidden
-                       transition-all duration-200
-                       hover:ring-2 hover:ring-[#0d531744]
-                       focus-within:ring-2 focus-within:ring-[#0d531744]">
+        <article class="barber-card group rounded-2xl overflow-hidden">
         <img src="images/inspirehairstuidiofernando.png" alt="Fernando — Inspire Hair Studio" class="h-56 w-full object-cover" />
         <div class="p-5">
           <div class="flex items-start justify-between gap-3">
@@ -111,10 +123,7 @@
       </article>
 
       <!-- Issac -->
-        <article class="group rounded-2xl bg-[var(--card)] ring-1 ring-white/10 overflow-hidden
-                       transition-all duration-200
-                       hover:ring-2 hover:ring-[#0d531744]
-                       focus-within:ring-2 focus-within:ring-[#0d531744]">
+        <article class="barber-card group rounded-2xl overflow-hidden">
         <img src="images/inspirehairstuidioissac.png" alt="Issac — Inspire Hair Studio" class="h-56 w-full object-cover" />
         <div class="p-5">
           <div class="flex items-start justify-between gap-3">
@@ -139,10 +148,7 @@
       </article>
 
       <!-- Jovani -->
-        <article class="group rounded-2xl bg-[var(--card)] ring-1 ring-white/10 overflow-hidden
-                       transition-all duration-200
-                       hover:ring-2 hover:ring-[#0d531744]
-                       focus-within:ring-2 focus-within:ring-[#0d531744]">
+        <article class="barber-card group rounded-2xl overflow-hidden">
         <img src="images/inspirehairstuidiojovani.png" alt="Jovani — Inspire Hair Studio" class="h-56 w-full object-cover" />
         <div class="p-5">
           <div class="flex items-start justify-between gap-3">
@@ -167,10 +173,7 @@
       </article>
 
       <!-- Junior -->
-        <article class="group rounded-2xl bg-[var(--card)] ring-1 ring-white/10 overflow-hidden
-                       transition-all duration-200
-                       hover:ring-2 hover:ring-[#0d531744]
-                       focus-within:ring-2 focus-within:ring-[#0d531744]">
+        <article class="barber-card group rounded-2xl overflow-hidden">
         <img src="images/juniortest2.png" alt="Junior — Inspire Hair Studio" class="h-56 w-full object-cover" />
         <div class="p-5">
           <div class="flex items-start justify-between gap-3">
