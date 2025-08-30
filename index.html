@@ -12,60 +12,7 @@
     :root{
       --card:#121216;
       --muted:#a4a7ac;
-      --accent:#1f3e26;      /* brand green */<!-- INSTAGRAM / GALLERY -->
-<section id="instagram" class="mx-auto max-w-7xl px-4 py-16 scroll-mt-24">
-  <header class="mb-8">
-    <h2 class="title text-3xl md:text-4xl">Gallery</h2>
-    <p class="text-[var(--muted)] mt-2">From our Instagram.</p>
-  </header>
-
-  <!-- Elfsight Instagram Feed -->
-  <div class="elfsight-container">
-    <div class="elfsight-wrapper">
-      <script src="https://elfsightcdn.com/platform.js" async></script>
-      <div class="elfsight-app-86bf5540-d345-4605-bf3e-eafa0d1ca237" data-elfsight-app-lazy></div>
-    </div>
-  </div>
-</section>
-
-<script>
-  // Remove Elfsight branding (robust: works when widget renders later)
-  (function removeElfsightBranding(){
-    const SELECTORS = [
-      'a[href*="elfsight.com"]',
-      '.eapps-widget__footer',
-      '.eapps-link',
-      '[data-elfsight-link]'
-    ];
-
-    function strip(root=document){
-      let removed = false;
-      SELECTORS.forEach(sel => {
-        root.querySelectorAll(sel).forEach(el => { el.remove(); removed = true; });
-      });
-      return removed;
-    }
-
-    // Try immediately, then on DOM changes, plus an interval fallback
-    const stopInterval = setInterval(() => { if (strip()) clearInterval(stopInterval); }, 500);
-
-    const mo = new MutationObserver(muts => {
-      for (const m of muts){
-        if (m.addedNodes && m.addedNodes.length){
-          m.addedNodes.forEach(n => {
-            if (n.nodeType === 1) { // element
-              if (strip(n)) { /* branding removed */ }
-            }
-          });
-        }
-      }
-    });
-    mo.observe(document.body, { childList: true, subtree: true });
-
-    // Safety stop after 30s
-    setTimeout(() => clearInterval(stopInterval), 30000);
-  })();
-</script>
+      --accent:#1f3e26;      
       --stroke:#2c5936;      /* ring color */
     }
 
@@ -315,16 +262,16 @@
     </div>
   </section>
 
-  <!-- INSTAGRAM / GALLERY -->
-  <section id="instagram" class="mx-auto max-w-7xl px-4 py-16 scroll-mt-24">
-    <header class="mb-8">
-      <h2 class="title text-3xl md:text-4xl">Gallery</h2>
-      <p class="text-[var(--muted)] mt-2">From our Instagram.</p>
-    </header>
+  <!-- INSTAGRAM / GALLERY (full-width band) -->
+  <section id="instagram" class="scroll-mt-24 bg-[#0e1713] py-16">
+    <div class="mx-auto max-w-7xl px-4">
+      <header class="mb-8">
+        <h2 class="title text-3xl md:text-4xl">Gallery</h2>
+        <p class="text-[var(--muted)] mt-2">From our Instagram.</p>
+      </header>
   
-    <!-- Elfsight Instagram Feed -->
-    <div class="elfsight-container">
-      <div class="elfsight-wrapper">
+      <!-- Elfsight Instagram Feed -->
+      <div class="elfsight-container">
         <script src="https://elfsightcdn.com/platform.js" async></script>
         <div class="elfsight-app-86bf5540-d345-4605-bf3e-eafa0d1ca237" data-elfsight-app-lazy></div>
       </div>
