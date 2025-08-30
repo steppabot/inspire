@@ -10,9 +10,8 @@
   <style>
     :root {
       --bg:#0b0b0d; --card:#121216; --muted:#a4a7ac;
-      --accent:#1f3e26;          /* brand green */
-      --stroke:#284d30;          /* strong ring */
-      --ring:#284d30;            /* subtle ring base */
+      --accent:#1f3e26;       /* brand green */
+      --stroke:#009923;       /* strong ring */
     }
 
     html { scroll-behavior: smooth; }
@@ -20,12 +19,11 @@
     body{
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
       color:#fff;
-      /* Diagonal green -> black background (subtle, clean) */
+      /* green-tinted diagonal gradient (not grey) */
       background:
         linear-gradient(135deg,
-          rgba(31,62,38,.38) 0%,
-          rgba(20,32,26,.22) 40%,
-          rgba(10,14,12,.08) 65%,
+          #14251a 0%,
+          #0f1b15 45%,
           #000 100%);
     }
 
@@ -50,7 +48,6 @@
       transition: transform .26s ease, box-shadow .26s ease, filter .26s ease;
       will-change: transform, box-shadow;
     }
-    /* Solid ring shown on hover/focus */
     .barber-card::after{
       content:""; position:absolute; inset:0; border-radius:inherit;
       border: 3px solid var(--stroke);
@@ -61,7 +58,6 @@
     .barber-card:focus-within{
       transform: translateY(-3px) scale(1.035);
       box-shadow: 0 0 0 1px rgba(255,255,255,.08);
-      /* compact, bottom-biased glow (contained) */
       filter:
         drop-shadow(0 14px 26px rgba(0,153,35,.42))
         drop-shadow(0 6px 14px  rgba(0,153,35,.30))
@@ -70,12 +66,16 @@
     .barber-card:hover::after,
     .barber-card:focus-within::after{ opacity:1; }
 
-    /* Summary row + chevron rotation only for the opened details */
-    .svc-summary{ display:flex; align-items:center; justify-content:space-between; padding:.5rem 0; cursor:pointer; user-select:none; }
+    /* ===== Custom accordion ===== */
+    .svc-toggle{
+      display:flex; align-items:center; justify-content:space-between;
+      width:100%; padding:.5rem 0; background:none; border:0;
+      font: inherit; color: inherit; cursor:pointer; user-select:none;
+    }
     .chev{ transition: transform .2s ease; }
-    details[open] .chev{ transform: rotate(180deg); }
+    .svc-toggle[aria-expanded="true"] .chev{ transform: rotate(180deg); }
+    .svc-panel{ margin-top:.5rem; }
 
-    /* Reduced motion */
     @media (prefers-reduced-motion: reduce){
       .barber-card, .barber-card::after, .chev { transition:none }
     }
@@ -107,7 +107,7 @@
       <a href="#team" class="hover:text-white font-semibold">book now</a>
     </nav>
 
-    <!-- Spacer only -->
+    <!-- Spacer -->
     <div class="relative mx-auto max-w-7xl px-4 pt-24 md:pt-28"></div>
 
     <div class="absolute bottom-6 inset-x-0 flex justify-center text-white/70 text-xs">scroll</div>
@@ -133,28 +133,30 @@
             <a data-book="fernando" class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-[#fcf8e6] font-semibold">Book</a>
           </div>
 
-          <details class="mt-4" id="svc-fernando">
-            <summary class="svc-summary">
+          <div class="svc mt-4">
+            <button class="svc-toggle" type="button" aria-expanded="false">
               <span class="font-semibold">Services &amp; Pricing</span>
               <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </summary>
-            <ul class="mt-2 space-y-3 text-sm">
-              <li class="flex items-start justify-between">
-                <div>
-                  <div class="font-medium">Haircut</div>
-                  <div class="text-xs text-[var(--muted)]">1 hr</div>
-                </div>
-                <span class="mt-0.5 text-white/90">$90</span>
-              </li>
-              <li class="flex items-start justify-between">
-                <div>
-                  <div class="font-medium">Haircut &amp; Beard</div>
-                  <div class="text-xs text-[var(--muted)]">1 hr 30 mins</div>
-                </div>
-                <span class="mt-0.5 text-white/90">$110</span>
-              </li>
-            </ul>
-          </details>
+            </button>
+            <div class="svc-panel" hidden>
+              <ul class="mt-2 space-y-3 text-sm">
+                <li class="flex items-start justify-between">
+                  <div>
+                    <div class="font-medium">Haircut</div>
+                    <div class="text-xs text-[var(--muted)]">1 hr</div>
+                  </div>
+                  <span class="mt-0.5 text-white/90">$90</span>
+                </li>
+                <li class="flex items-start justify-between">
+                  <div>
+                    <div class="font-medium">Haircut &amp; Beard</div>
+                    <div class="text-xs text-[var(--muted)]">1 hr 30 mins</div>
+                  </div>
+                  <span class="mt-0.5 text-white/90">$110</span>
+                </li>
+              </ul>
+            </div>
+          </div>
         </div>
       </article>
 
@@ -170,17 +172,19 @@
             <a data-book="issac" class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-[#fcf8e6] font-semibold">Book</a>
           </div>
 
-          <details class="mt-4" id="svc-issac">
-            <summary class="svc-summary">
+          <div class="svc mt-4">
+            <button class="svc-toggle" type="button" aria-expanded="false">
               <span class="font-semibold">Services &amp; Pricing</span>
               <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </summary>
-            <ul class="mt-2 space-y-3 text-sm">
-              <li class="flex items-center justify-between"><span>Scissor Cut</span><span class="text-white/90">$42</span></li>
-              <li class="flex items-center justify-between"><span>Taper + Shears</span><span class="text-white/90">$48</span></li>
-              <li class="flex items-center justify-between"><span>Beard &amp; Hot Towel</span><span class="text-white/90">$28</span></li>
-            </ul>
-          </details>
+            </button>
+            <div class="svc-panel" hidden>
+              <ul class="mt-2 space-y-3 text-sm">
+                <li class="flex items-center justify-between"><span>Scissor Cut</span><span class="text-white/90">$42</span></li>
+                <li class="flex items-center justify-between"><span>Taper + Shears</span><span class="text-white/90">$48</span></li>
+                <li class="flex items-center justify-between"><span>Beard &amp; Hot Towel</span><span class="text-white/90">$28</span></li>
+              </ul>
+            </div>
+          </div>
         </div>
       </article>
 
@@ -196,17 +200,19 @@
             <a data-book="jovani" class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-[#fcf8e6] font-semibold">Book</a>
           </div>
 
-          <details class="mt-4" id="svc-jovani">
-            <summary class="svc-summary">
+          <div class="svc mt-4">
+            <button class="svc-toggle" type="button" aria-expanded="false">
               <span class="font-semibold">Services &amp; Pricing</span>
               <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </summary>
-            <ul class="mt-2 space-y-3 text-sm">
-              <li class="flex items-center justify-between"><span>Signature Cut</span><span class="text-white/90">$40</span></li>
-              <li class="flex items-center justify-between"><span>Razor Fade</span><span class="text-white/90">$50</span></li>
-              <li class="flex items-center justify-between"><span>Beard Sculpt</span><span class="text-white/90">$30</span></li>
-            </ul>
-          </details>
+            </button>
+            <div class="svc-panel" hidden>
+              <ul class="mt-2 space-y-3 text-sm">
+                <li class="flex items-center justify-between"><span>Signature Cut</span><span class="text-white/90">$40</span></li>
+                <li class="flex items-center justify-between"><span>Razor Fade</span><span class="text-white/90">$50</span></li>
+                <li class="flex items-center justify-between"><span>Beard Sculpt</span><span class="text-white/90">$30</span></li>
+              </ul>
+            </div>
+          </div>
         </div>
       </article>
 
@@ -222,17 +228,19 @@
             <a data-book="junior" class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-[#fcf8e6] font-semibold">Book</a>
           </div>
 
-          <details class="mt-4" id="svc-junior">
-            <summary class="svc-summary">
+          <div class="svc mt-4">
+            <button class="svc-toggle" type="button" aria-expanded="false">
               <span class="font-semibold">Services &amp; Pricing</span>
               <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </summary>
-            <ul class="mt-2 space-y-3 text-sm">
-              <li class="flex items-center justify-between"><span>Signature Cut</span><span class="text-white/90">$38</span></li>
-              <li class="flex items-center justify-between"><span>Fade</span><span class="text-white/90">$45</span></li>
-              <li class="flex items-center justify-between"><span>Beard Trim</span><span class="text-white/90">$22</span></li>
-            </ul>
-          </details>
+            </button>
+            <div class="svc-panel" hidden>
+              <ul class="mt-2 space-y-3 text-sm">
+                <li class="flex items-center justify-between"><span>Signature Cut</span><span class="text-white/90">$38</span></li>
+                <li class="flex items-center justify-between"><span>Fade</span><span class="text-white/90">$45</span></li>
+                <li class="flex items-center justify-between"><span>Beard Trim</span><span class="text-white/90">$22</span></li>
+              </ul>
+            </div>
+          </div>
         </div>
       </article>
     </div>
@@ -346,18 +354,29 @@
       btn.rel = 'noopener';
     });
 
-    // Accordion: only one <details> open at a time inside #team
-    const team = document.getElementById('team');
-    const allDetails = team.querySelectorAll('details');
+    // ===== Custom accordion: allow ONLY ONE open =====
+    const toggles = Array.from(document.querySelectorAll('.svc-toggle'));
+    const panels  = Array.from(document.querySelectorAll('.svc-panel'));
 
-    // Ensure all are closed on load (in case browser restores state)
-    allDetails.forEach(d => d.open = false);
+    function closeAll(){
+      toggles.forEach(t => t.setAttribute('aria-expanded','false'));
+      panels.forEach(p => p.hidden = true);
+    }
+    closeAll(); // start closed
 
-    allDetails.forEach(d => {
-      d.addEventListener('toggle', () => {
-        if (d.open) {
-          allDetails.forEach(other => { if (other !== d) other.open = false; });
+    toggles.forEach(t => {
+      t.addEventListener('click', () => {
+        const expanded = t.getAttribute('aria-expanded') === 'true';
+        closeAll();
+        if (!expanded) {
+          t.setAttribute('aria-expanded','true');
+          const panel = t.nextElementSibling;
+          if (panel && panel.classList.contains('svc-panel')) panel.hidden = false;
         }
+      });
+      // keyboard support
+      t.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); t.click(); }
       });
     });
   </script>
