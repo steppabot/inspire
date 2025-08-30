@@ -389,7 +389,42 @@
       window.addEventListener('resize', () => items.forEach(setSpan));
     });
   </script>
+    <!-- Load Elfsight AFTER both widget containers exist (no async) -->
   <!-- Load Elfsight AFTER both widget containers exist (no async) -->
   <script src="https://elfsightcdn.com/platform.js"></script>
+  
+  <script>
+    // Remove Elfsight branding (scoped + safe)
+    (function removeElfsightBranding(){
+      const ROOTS = () => document.querySelectorAll('.eapps-widget');
+      const SELECTORS = [
+        'a[href*="elfsight.com"]',
+        '.eapps-widget__footer',
+        '[data-elfsight-link]'
+      ];
+      function strip(root=document){
+        let removed = false;
+        SELECTORS.forEach(sel => {
+          root.querySelectorAll(sel).forEach(el => { el.remove(); removed = true; });
+        });
+        return removed;
+      }
+      // Try on full doc and on each widget root
+      const tryAll = () => { strip(document); ROOTS().forEach(r => strip(r)); };
+  
+      const interval = setInterval(() => { if (tryAll()) clearInterval(interval); }, 500);
+  
+      const mo = new MutationObserver(muts => {
+        muts.forEach(m => {
+          m.addedNodes && m.addedNodes.forEach(n => {
+            if (n.nodeType === 1) { strip(n); }
+          });
+        });
+      });
+      mo.observe(document.body, { childList: true, subtree: true });
+  
+      setTimeout(() => clearInterval(interval), 30000);
+    })();
+  </script>
 </body>
 </html>
