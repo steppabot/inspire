@@ -257,24 +257,28 @@
         <h2 class="title text-3xl md:text-4xl">Gallery</h2>
         <p class="text-[var(--muted)] mt-2">From our Instagram.</p>
       </div>
-      <a href="https://instagram.com/YOUR_HANDLE" class="text-[var(--accent)] hover:underline">@YOUR_HANDLE</a>
     </header>
-    <div class="relative">
-      <div id="igCarousel" class="flex gap-3 overflow-x-auto scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none]" style="scrollbar-width:none;">
-        <style>#igCarousel::-webkit-scrollbar{display:none}</style>
-        <a class="shrink-0 snap-start"><img src="images/ig1.png" alt="Cut" class="h-72 w-72 object-cover rounded-xl"></a>
-        <a class="shrink-0 snap-start"><img src="images/ig2.png" alt="Cut" class="h-72 w-72 object-cover rounded-xl"></a>
-        <a class="shrink-0 snap-start"><img src="images/ig3.png" alt="Cut" class="h-72 w-72 object-cover rounded-xl"></a>
-        <a class="shrink-0 snap-start"><img src="images/ig4.png" alt="Cut" class="h-72 w-72 object-cover rounded-xl"></a>
-        <a class="shrink-0 snap-start"><img src="images/ig5.png" alt="Cut" class="h-72 w-72 object-cover rounded-xl"></a>
-        <a class="shrink-0 snap-start"><img src="images/ig6.png" alt="Cut" class="h-72 w-72 object-cover rounded-xl"></a>
-      </div>
-      <div class="pointer-events-none absolute inset-y-0 left-0 right-0 flex items-center justify-between">
-        <button onclick="scrollByCard('igCarousel',-1)" class="pointer-events-auto ml-[-8px] rounded-full bg-black/40 px-3 py-2 ring-1 ring-white/20 text-[#fcf8e6]">‹</button>
-        <button onclick="scrollByCard('igCarousel',1)" class="pointer-events-auto mr-[-8px] rounded-full bg-black/40 px-3 py-2 ring-1 ring-white/20 text-[#fcf8e6]">›</button>
+  
+    <!-- Elfsight Instagram Feed -->
+    <div class="elfsight-container">
+      <div class="elfsight-wrapper">
+        <script src="https://elfsightcdn.com/platform.js" async></script>
+        <div class="elfsight-app-86bf5540-d345-4605-bf3e-eafa0d1ca237" data-elfsight-app-lazy></div>
       </div>
     </div>
   </section>
+  
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      let interval = setInterval(function () {
+        // look for the Elfsight branding link and remove it
+        let elfsightBranding = document.querySelector('a[href*="elfsight.com/instagram-feed"]');
+        if (elfsightBranding) {
+          elfsightBranding.remove();
+          clearInterval(interval); // stop checking once removed
+        }
+      }, 500);
+    });
 
   <!-- REVIEWS -->
   <section id="reviews" class="mx-auto max-w-7xl px-4 py-16 scroll-mt-24">
