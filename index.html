@@ -292,29 +292,6 @@
     <div class="elfsight-app-1f9376d2-cd21-4860-b3c5-bc9e1ad65ac6" data-elfsight-app-lazy></div>
   </section>
 
-  <script>
-    (function removeElfsightBranding(){
-      const SELECTORS = [
-        'a[href*="elfsight.com"]',
-        '.eapps-widget__footer',
-        '[data-elfsight-link]'
-      ];
-      function strip(root=document){
-        let removed = false;
-        SELECTORS.forEach(sel => {
-          root.querySelectorAll(sel).forEach(el => { el.remove(); removed = true; });
-        });
-        return removed;
-      }
-      const interval = setInterval(() => { if (strip()) clearInterval(interval); }, 500);
-      const mo = new MutationObserver(muts => {
-        muts.forEach(m => m.addedNodes && m.addedNodes.forEach(n => n.nodeType===1 && strip(n)));
-      });
-      mo.observe(document.body, { childList: true, subtree: true });
-      setTimeout(() => clearInterval(interval), 30000);
-    })();
-  </script>
-
   <!-- LOCATION -->
   <section id="location" class="mx-auto max-w-7xl px-4 py-16 scroll-mt-24">
     <header class="mb-8">
@@ -407,44 +384,46 @@
     });
   </script>
 
-  <script>
-    // Masonry sizing — MUST match #teamGrid { grid-auto-rows: 4px }
-    document.addEventListener('DOMContentLoaded', () => {
-      const grid = document.getElementById('teamGrid');
-      if (!grid) return;
-
-      // Read actual row size & gap from computed styles (works cross-browser)
-      const cs = getComputedStyle(grid);
-      const ROW = parseFloat(cs.getPropertyValue('grid-auto-rows')) || 4;
-      const GAP = parseFloat(cs.getPropertyValue('row-gap')) || 0;
-
-      const items = [...grid.querySelectorAll('.barber-card')];
-
-      function setSpan(el){
-        const h = el.getBoundingClientRect().height;
-        // Include the gap in both numerator and denominator to avoid Firefox over-span
-        const rows = Math.ceil( (h + GAP) / (ROW + GAP) );
-        el.style.setProperty('--rows', rows);
-      }
-
-      // Observe changes (accordion open/close, responsive, etc.)
-      const ro = new ResizeObserver(entries => {
-        for (const e of entries) setSpan(e.target);
-      });
-
-      items.forEach(el => {
-        // Recalc when images load
-        el.querySelectorAll('img').forEach(img => {
-          if (!img.complete) img.addEventListener('load', () => setSpan(el), {once:true});
-        });
-        setSpan(el);
-        ro.observe(el);
-      });
-
+  
       // Safety: on resize, recompute all
       window.addEventListener('resize', () => items.forEach(setSpan));
     });
   </script>
-  <script src="https://elfsightcdn.com/platform.js" async></script>
+  <!-- Load Elfsight AFTER both widget containers exist (no async) -->
+  <script src="https://elfsightcdn.com/platform.js"></script>
+  
+  <script>
+    // Remove Elfsight branding (scoped + safe)
+    (function removeElfsightBranding(){
+      const ROOTS = () => document.querySelectorAll('.eapps-widget');
+      const SELECTORS = [
+        'a[href*="elfsight.com"]',
+        '.eapps-widget__footer',
+        '[data-elfsight-link]'
+      ];
+      function strip(root=document){
+        let removed = false;
+        SELECTORS.forEach(sel => {
+          root.querySelectorAll(sel).forEach(el => { el.remove(); removed = true; });
+        });
+        return removed;
+      }
+      // Try on full doc and on each widget root
+      const tryAll = () => { strip(document); ROOTS().forEach(r => strip(r)); };
+  
+      const interval = setInterval(() => { if (tryAll()) clearInterval(interval); }, 500);
+  
+      const mo = new MutationObserver(muts => {
+        muts.forEach(m => {
+          m.addedNodes && m.addedNodes.forEach(n => {
+            if (n.nodeType === 1) { strip(n); }
+          });
+        });
+      });
+      mo.observe(document.body, { childList: true, subtree: true });
+  
+      setTimeout(() => clearInterval(interval), 30000);
+    })();
+  </script>
 </body>
 </html>
