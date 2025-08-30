@@ -83,7 +83,10 @@
   
     /* Keep cards from clipping the flyout on lg+ */
     @media (min-width:1024px){
-      .barber-card{ overflow: visible; }
+      .barber-card{
+        overflow: visible !important;   /* ← defeats .overflow-hidden utility */
+      .barber-card.is-open{ z-index: 999; }
+      }
     }
     
     /* Position the panel as an overlay on lg+ */
