@@ -394,35 +394,38 @@
   <script src="https://elfsightcdn.com/platform.js"></script>
   
   <script>
-    // Remove Elfsight branding (scoped + safe)
-    (function removeElfsightBranding(){
-      const ROOTS = () => document.querySelectorAll('.eapps-widget');
-      const SELECTORS = [
-        'a[href*="elfsight.com"]',
-        '.eapps-widget__footer',
-        '[data-elfsight-link]'
-      ];
-      function strip(root=document){
+    // Safer Elfsight branding remover (footer-only, scoped to widgets)
+    (function () {
+      const WIDGETS = () => document.querySelectorAll('.eapps-widget');
+  
+      function strip(root = document) {
         let removed = false;
-        SELECTORS.forEach(sel => {
-          root.querySelectorAll(sel).forEach(el => { el.remove(); removed = true; });
-        });
+        // Only remove within widget footers (branding lives here)
+        root.querySelectorAll(
+          '.eapps-widget .eapps-widget__footer, .eapps-widget .eapps-widget__footer *,' +
+          '.eapps-widget a[href*="elfsight.com"]'
+        ).forEach(el => { el.remove(); removed = true; });
         return removed;
       }
-      // Try on full doc and on each widget root
-      const tryAll = () => { strip(document); ROOTS().forEach(r => strip(r)); };
   
-      const interval = setInterval(() => { if (tryAll()) clearInterval(interval); }, 500);
+      // Try a few times after widgets mount
+      const interval = setInterval(() => {
+        if (WIDGETS().length && strip()) clearInterval(interval);
+      }, 600);
   
+      // Also watch for late-added footers/links
       const mo = new MutationObserver(muts => {
         muts.forEach(m => {
           m.addedNodes && m.addedNodes.forEach(n => {
-            if (n.nodeType === 1) { strip(n); }
+            if (n.nodeType !== 1) return;
+            if (n.matches?.('.eapps-widget__footer, .eapps-widget a[href*="elfsight.com"]')) { n.remove(); return; }
+            strip(n); // in case footer is nested
           });
         });
       });
       mo.observe(document.body, { childList: true, subtree: true });
   
+      // Safety stop for the interval
       setTimeout(() => clearInterval(interval), 30000);
     })();
   </script>
