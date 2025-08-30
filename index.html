@@ -39,22 +39,18 @@
 
     a,button,input,textarea{ outline-offset:2px; }
 
-    /* ===== Card hover treatment (zoom + ring + contained glow) ===== */
     .barber-card{
-      position:relative;
-      isolation:isolate;
-      background:var(--card);
-      border-radius:1rem;
-      box-shadow:0 0 0 1px rgba(255,255,255,.10);
+      position:relative; isolation:isolate; background:var(--card);
+      border-radius:1rem; box-shadow:0 0 0 1px rgba(255,255,255,.10);
       transform:translateY(0) scale(1);
       transition:transform .26s ease, box-shadow .26s ease, filter .26s ease;
-      will-change:transform,box-shadow;
     }
     .barber-card::after{
       content:""; position:absolute; inset:0; border-radius:inherit;
-      border:3px solid var(--stroke);
-      opacity:0; transition:opacity .2s ease; pointer-events:none; z-index:1;
+      border:3px solid var(--stroke); opacity:0; transition:opacity .2s ease;
+      pointer-events:none; z-index:1;
     }
+    /* ALWAYS on hover — regardless of open/closed state */
     .barber-card:hover{
       transform:translateY(-3px) scale(1.035);
       box-shadow:0 0 0 1px rgba(255,255,255,.08);
@@ -73,12 +69,11 @@
       background:none; border:0; color:inherit; text-align:left;
       cursor:pointer;
     }
-    .svc-toggle:focus-visible{
-      outline:2px solid #009923;
-      outline-offset:4px;
-      border-radius:.5rem;
+    .svc-toggle{
+      display:flex; align-items:center; gap:.5rem;
+      padding:.5rem 0; background:none; border:0; color:inherit; cursor:pointer;
     }
-    .chev{ transition:transform .2s ease; }
+    .chev{ display:block; transition:transform .2s ease; }
     .svc-toggle[aria-expanded="true"] .chev{ transform:rotate(180deg); }
 
     /* Panels default closed; open when parent card has .is-open */
@@ -138,8 +133,10 @@
 
           <div class="svc mt-4">
             <button class="svc-toggle" type="button" aria-expanded="false" aria-controls="p-fernando">
-              <span class="font-semibold">Services &amp; Pricing</span>
-              <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              <span class="flex items-center gap-2 font-semibold">
+                Services &amp; Pricing
+                <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </span>
             </button>
             <div id="p-fernando" class="svc-panel">
               <ul class="mt-2 space-y-3 text-sm">
@@ -176,9 +173,11 @@
           </div>
 
           <div class="svc mt-4">
-            <button class="svc-toggle" type="button" aria-expanded="false" aria-controls="p-issac">
-              <span class="font-semibold">Services &amp; Pricing</span>
-              <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            <button class="svc-toggle" type="button" aria-expanded="false" aria-controls="p-fernando">
+              <span class="flex items-center gap-2 font-semibold">
+                Services &amp; Pricing
+                <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </span>
             </button>
             <div id="p-issac" class="svc-panel">
               <ul class="mt-2 space-y-3 text-sm">
@@ -204,9 +203,11 @@
           </div>
 
           <div class="svc mt-4">
-            <button class="svc-toggle" type="button" aria-expanded="false" aria-controls="p-jovani">
-              <span class="font-semibold">Services &amp; Pricing</span>
-              <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            <button class="svc-toggle" type="button" aria-expanded="false" aria-controls="p-fernando">
+              <span class="flex items-center gap-2 font-semibold">
+                Services &amp; Pricing
+                <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </span>
             </button>
             <div id="p-jovani" class="svc-panel">
               <ul class="mt-2 space-y-3 text-sm">
@@ -232,9 +233,11 @@
           </div>
 
           <div class="svc mt-4">
-            <button class="svc-toggle" type="button" aria-expanded="false" aria-controls="p-junior">
-              <span class="font-semibold">Services &amp; Pricing</span>
-              <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+            <button class="svc-toggle" type="button" aria-expanded="false" aria-controls="p-fernando">
+              <span class="flex items-center gap-2 font-semibold">
+                Services &amp; Pricing
+                <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </span>
             </button>
             <div id="p-junior" class="svc-panel">
               <ul class="mt-2 space-y-3 text-sm">
@@ -336,14 +339,16 @@
   </footer>
 
   <script>
-    // helper
+    // helper: carousel scroll
     function scrollByCard(id, dir){
       const el = document.getElementById(id);
       el && el.scrollBy({ left: dir * el.clientWidth * 0.9, behavior: 'smooth' });
     }
+  
+    // auto-update footer year
     document.getElementById('y').textContent = new Date().getFullYear();
-
-    // Book buttons
+  
+    // Book buttons (barber booking links)
     const BOOK = {
       fernando: 'https://getsquire.com/booking/book/fernandoughfades-sherman/barber/fernando-jimenez-1/services?utm_source=site&utm_medium=book_button&utm_campaign=fernando',
       issac:    'https://getsquire.com/booking/book/isaac-blends-hutchins/barber/isaac-castillo-1/services?utm_source=site&utm_medium=book_button&utm_campaign=issac',
@@ -352,39 +357,39 @@
     };
     document.querySelectorAll('[data-book]').forEach(btn => {
       const id = btn.dataset.book;
-      btn.href = BOOK[id]; btn.target = '_blank'; btn.rel = 'noopener';
+      btn.href = BOOK[id];
+      btn.target = '_blank';
+      btn.rel = 'noopener';
     });
-
-    // ===== Single-open accordion (parent .is-open controls visibility) =====
-    const cards = Array.from(document.querySelectorAll('.barber-card'));
-
+  
+    // ===== Single-open accordion (services & pricing) =====
+    const cards = [...document.querySelectorAll('.barber-card')];
+  
     // start closed
-    cards.forEach(c => {
-      c.classList.remove('is-open');
-      const btn = c.querySelector('.svc-toggle');
-      btn.setAttribute('aria-expanded','false');
-    });
-
-    function closeAll() {
+    cards.forEach(c => c.querySelector('.svc-toggle')?.setAttribute('aria-expanded', 'false'));
+  
+    function closeAll(){
       cards.forEach(c => {
         c.classList.remove('is-open');
-        const b = c.querySelector('.svc-toggle');
-        b && b.setAttribute('aria-expanded','false');
+        c.querySelector('.svc-toggle')?.setAttribute('aria-expanded','false');
       });
     }
-
+  
     cards.forEach(card => {
       const btn = card.querySelector('.svc-toggle');
       btn.addEventListener('click', () => {
-        const isOpen = card.classList.contains('is-open');
+        const wasOpen = card.classList.contains('is-open');
         closeAll();
-        if (!isOpen) {
+        if (!wasOpen){
           card.classList.add('is-open');
           btn.setAttribute('aria-expanded','true');
         }
       });
       btn.addEventListener('keydown', e => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); btn.click(); }
+        if (e.key === 'Enter' || e.key === ' '){
+          e.preventDefault();
+          btn.click();
+        }
       });
     });
   </script>
