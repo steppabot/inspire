@@ -12,7 +12,60 @@
     :root{
       --card:#121216;
       --muted:#a4a7ac;
-      --accent:#1f3e26;      /* brand green */
+      --accent:#1f3e26;      /* brand green */<!-- INSTAGRAM / GALLERY -->
+<section id="instagram" class="mx-auto max-w-7xl px-4 py-16 scroll-mt-24">
+  <header class="mb-8">
+    <h2 class="title text-3xl md:text-4xl">Gallery</h2>
+    <p class="text-[var(--muted)] mt-2">From our Instagram.</p>
+  </header>
+
+  <!-- Elfsight Instagram Feed -->
+  <div class="elfsight-container">
+    <div class="elfsight-wrapper">
+      <script src="https://elfsightcdn.com/platform.js" async></script>
+      <div class="elfsight-app-86bf5540-d345-4605-bf3e-eafa0d1ca237" data-elfsight-app-lazy></div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Remove Elfsight branding (robust: works when widget renders later)
+  (function removeElfsightBranding(){
+    const SELECTORS = [
+      'a[href*="elfsight.com"]',
+      '.eapps-widget__footer',
+      '.eapps-link',
+      '[data-elfsight-link]'
+    ];
+
+    function strip(root=document){
+      let removed = false;
+      SELECTORS.forEach(sel => {
+        root.querySelectorAll(sel).forEach(el => { el.remove(); removed = true; });
+      });
+      return removed;
+    }
+
+    // Try immediately, then on DOM changes, plus an interval fallback
+    const stopInterval = setInterval(() => { if (strip()) clearInterval(stopInterval); }, 500);
+
+    const mo = new MutationObserver(muts => {
+      for (const m of muts){
+        if (m.addedNodes && m.addedNodes.length){
+          m.addedNodes.forEach(n => {
+            if (n.nodeType === 1) { // element
+              if (strip(n)) { /* branding removed */ }
+            }
+          });
+        }
+      }
+    });
+    mo.observe(document.body, { childList: true, subtree: true });
+
+    // Safety stop after 30s
+    setTimeout(() => clearInterval(stopInterval), 30000);
+  })();
+</script>
       --stroke:#2c5936;      /* ring color */
     }
 
@@ -35,6 +88,10 @@
 
     a,button,input,textarea{ outline-offset:2px; }
 
+  
+    .elfsight-container .eapps-instagram-feed, 
+    .elfsight-container [class*="eapps-"] { border-radius: 0.75rem; overflow: hidden; }
+      
     /* Card */
     .barber-card{
       position:relative; isolation:isolate; background:var(--card);
@@ -251,31 +308,60 @@
     </div>
   </section>
 
-  <!-- INSTAGRAM -->
+  <!-- INSTAGRAM / GALLERY -->
   <section id="instagram" class="mx-auto max-w-7xl px-4 py-16 scroll-mt-24">
-    <header class="mb-8 flex items-end justify-between">
-      <div>
-        <h2 class="title text-3xl md:text-4xl">Gallery</h2>
-        <p class="text-[var(--muted)] mt-2">From our Instagram.</p>
-      </div>
-      <a href="https://instagram.com/YOUR_HANDLE" class="text-[var(--accent)] hover:underline">@YOUR_HANDLE</a>
+    <header class="mb-8">
+      <h2 class="title text-3xl md:text-4xl">Gallery</h2>
+      <p class="text-[var(--muted)] mt-2">From our Instagram.</p>
     </header>
-    <div class="relative">
-      <div id="igCarousel" class="flex gap-3 overflow-x-auto scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none]" style="scrollbar-width:none;">
-        <style>#igCarousel::-webkit-scrollbar{display:none}</style>
-        <a class="shrink-0 snap-start"><img src="images/ig1.png" alt="Cut" class="h-72 w-72 object-cover rounded-xl"></a>
-        <a class="shrink-0 snap-start"><img src="images/ig2.png" alt="Cut" class="h-72 w-72 object-cover rounded-xl"></a>
-        <a class="shrink-0 snap-start"><img src="images/ig3.png" alt="Cut" class="h-72 w-72 object-cover rounded-xl"></a>
-        <a class="shrink-0 snap-start"><img src="images/ig4.png" alt="Cut" class="h-72 w-72 object-cover rounded-xl"></a>
-        <a class="shrink-0 snap-start"><img src="images/ig5.png" alt="Cut" class="h-72 w-72 object-cover rounded-xl"></a>
-        <a class="shrink-0 snap-start"><img src="images/ig6.png" alt="Cut" class="h-72 w-72 object-cover rounded-xl"></a>
-      </div>
-      <div class="pointer-events-none absolute inset-y-0 left-0 right-0 flex items-center justify-between">
-        <button onclick="scrollByCard('igCarousel',-1)" class="pointer-events-auto ml-[-8px] rounded-full bg-black/40 px-3 py-2 ring-1 ring-white/20 text-[#fcf8e6]">‹</button>
-        <button onclick="scrollByCard('igCarousel',1)" class="pointer-events-auto mr-[-8px] rounded-full bg-black/40 px-3 py-2 ring-1 ring-white/20 text-[#fcf8e6]">›</button>
+  
+    <!-- Elfsight Instagram Feed -->
+    <div class="elfsight-container">
+      <div class="elfsight-wrapper">
+        <script src="https://elfsightcdn.com/platform.js" async></script>
+        <div class="elfsight-app-86bf5540-d345-4605-bf3e-eafa0d1ca237" data-elfsight-app-lazy></div>
       </div>
     </div>
   </section>
+  
+  <script>
+    // Remove Elfsight branding (robust: works when widget renders later)
+    (function removeElfsightBranding(){
+      const SELECTORS = [
+        'a[href*="elfsight.com"]',
+        '.eapps-widget__footer',
+        '.eapps-link',
+        '[data-elfsight-link]'
+      ];
+  
+      function strip(root=document){
+        let removed = false;
+        SELECTORS.forEach(sel => {
+          root.querySelectorAll(sel).forEach(el => { el.remove(); removed = true; });
+        });
+        return removed;
+      }
+  
+      // Try immediately, then on DOM changes, plus an interval fallback
+      const stopInterval = setInterval(() => { if (strip()) clearInterval(stopInterval); }, 500);
+  
+      const mo = new MutationObserver(muts => {
+        for (const m of muts){
+          if (m.addedNodes && m.addedNodes.length){
+            m.addedNodes.forEach(n => {
+              if (n.nodeType === 1) { // element
+                if (strip(n)) { /* branding removed */ }
+              }
+            });
+          }
+        }
+      });
+      mo.observe(document.body, { childList: true, subtree: true });
+  
+      // Safety stop after 30s
+      setTimeout(() => clearInterval(stopInterval), 30000);
+    })();
+  </script>
 
   <!-- REVIEWS -->
   <section id="reviews" class="mx-auto max-w-7xl px-4 py-16 scroll-mt-24">
