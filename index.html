@@ -15,35 +15,36 @@
       --accent:#1f3e26;      /* brand green */
       --stroke:#2c5936;      /* ring color */
     }
-  
+
     html { scroll-behavior:smooth; }
-  
+
     body{
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
       color:#fff;
       background: linear-gradient(135deg,#14251a 0%,#0f1b15 45%,#000000 100%);
     }
-  
+
     .title { font-family: "League Spartan", Inter, sans-serif; }
-  
+
     .grain{ position:relative; }
     .grain::after{
       content:""; position:absolute; inset:0; pointer-events:none; opacity:.06;
       background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>');
       mix-blend-mode:soft-light;
     }
-  
+
     a,button,input,textarea{ outline-offset:2px; }
-  
+
+    /* Card */
     .barber-card{
       position:relative; isolation:isolate; background:var(--card);
       border-radius:1rem; box-shadow:0 0 0 1px rgba(255,255,255,.10);
       transform:translateY(0) scale(1);
       transition:transform .26s ease, box-shadow .26s ease, filter .26s ease;
-      display:flex;               /* masonry: internal flex layout */
+      display:flex;               /* for internal layout */
       flex-direction:column;
-      grid-row: span var(--rows, 1);
-      overflow:hidden;            /* back to inline panels */
+      grid-row: span var(--rows, 1);  /* masonry span */
+      overflow:hidden;                /* inline panel; no overlay */
     }
     .barber-card::after{
       content:""; position:absolute; inset:0; border-radius:inherit;
@@ -59,8 +60,8 @@
         drop-shadow(0 3px 6px rgba(0,0,0,.40));
     }
     .barber-card:hover::after{ opacity:1; }
-  
-    /* ===== Accordion button/chevron ===== */
+
+    /* Accordion */
     .svc-toggle{
       display:flex; align-items:center; justify-content:space-between;
       gap:.75rem; width:100%;
@@ -70,17 +71,17 @@
     }
     .chev{ display:block; transition:transform .2s ease; }
     .svc-toggle[aria-expanded="true"] .chev{ transform:rotate(180deg); }
-  
+
     /* Panels default closed; open when parent card has .is-open */
     .svc-panel{ display:none; }
     .barber-card.is-open .svc-panel{ display:block; }
-  
+
     @media (prefers-reduced-motion:reduce){
       .barber-card, .barber-card::after, .chev { transition:none; }
     }
-  
-    /* Masonry grid rows */
-    #teamGrid{ grid-auto-rows: 4px; }   /* 4px row height for smooth spans */
+
+    /* Masonry rows: tiny fixed row height; JS sets --rows */
+    #teamGrid{ grid-auto-rows: 4px; }
   </style>
 </head>
 <body class="antialiased">
@@ -118,7 +119,7 @@
 
     <div id="teamGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 items-start">
       <!-- Fernando -->
-      <article class="barber-card h-full flex flex-col rounded-2xl overflow-hidden">
+      <article class="barber-card rounded-2xl">
         <img src="images/inspirehairstuidiofernando.png" alt="Fernando — Inspire Hair Studio" class="h-56 w-full object-cover" />
         <div class="p-5">
           <div class="flex items-start justify-between gap-3">
@@ -159,7 +160,7 @@
       </article>
 
       <!-- Issac -->
-      <article class="barber-card h-full flex flex-col rounded-2xl overflow-hidden">
+      <article class="barber-card rounded-2xl">
         <img src="images/inspirehairstuidioissac.png" alt="Issac — Inspire Hair Studio" class="h-56 w-full object-cover" />
         <div class="p-5">
           <div class="flex items-start justify-between gap-3">
@@ -189,7 +190,7 @@
       </article>
 
       <!-- Jovani -->
-      <article class="barber-card h-full flex flex-col rounded-2xl overflow-hidden">
+      <article class="barber-card rounded-2xl">
         <img src="images/inspirehairstuidiojovani.png" alt="Jovani — Inspire Hair Studio" class="h-56 w-full object-cover" />
         <div class="p-5">
           <div class="flex items-start justify-between gap-3">
@@ -219,7 +220,7 @@
       </article>
 
       <!-- Junior -->
-      <article class="barber-card h-full flex flex-col rounded-2xl overflow-hidden">
+      <article class="barber-card rounded-2xl">
         <img src="images/juniortest2.png" alt="Junior — Inspire Hair Studio" class="h-56 w-full object-cover" />
         <div class="p-5">
           <div class="flex items-start justify-between gap-3">
@@ -257,28 +258,24 @@
         <h2 class="title text-3xl md:text-4xl">Gallery</h2>
         <p class="text-[var(--muted)] mt-2">From our Instagram.</p>
       </div>
+      <a href="https://instagram.com/YOUR_HANDLE" class="text-[var(--accent)] hover:underline">@YOUR_HANDLE</a>
     </header>
-  
-    <!-- Elfsight Instagram Feed -->
-    <div class="elfsight-container">
-      <div class="elfsight-wrapper">
-        <script src="https://elfsightcdn.com/platform.js" async></script>
-        <div class="elfsight-app-86bf5540-d345-4605-bf3e-eafa0d1ca237" data-elfsight-app-lazy></div>
+    <div class="relative">
+      <div id="igCarousel" class="flex gap-3 overflow-x-auto scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none]" style="scrollbar-width:none;">
+        <style>#igCarousel::-webkit-scrollbar{display:none}</style>
+        <a class="shrink-0 snap-start"><img src="images/ig1.png" alt="Cut" class="h-72 w-72 object-cover rounded-xl"></a>
+        <a class="shrink-0 snap-start"><img src="images/ig2.png" alt="Cut" class="h-72 w-72 object-cover rounded-xl"></a>
+        <a class="shrink-0 snap-start"><img src="images/ig3.png" alt="Cut" class="h-72 w-72 object-cover rounded-xl"></a>
+        <a class="shrink-0 snap-start"><img src="images/ig4.png" alt="Cut" class="h-72 w-72 object-cover rounded-xl"></a>
+        <a class="shrink-0 snap-start"><img src="images/ig5.png" alt="Cut" class="h-72 w-72 object-cover rounded-xl"></a>
+        <a class="shrink-0 snap-start"><img src="images/ig6.png" alt="Cut" class="h-72 w-72 object-cover rounded-xl"></a>
+      </div>
+      <div class="pointer-events-none absolute inset-y-0 left-0 right-0 flex items-center justify-between">
+        <button onclick="scrollByCard('igCarousel',-1)" class="pointer-events-auto ml-[-8px] rounded-full bg-black/40 px-3 py-2 ring-1 ring-white/20 text-[#fcf8e6]">‹</button>
+        <button onclick="scrollByCard('igCarousel',1)" class="pointer-events-auto mr-[-8px] rounded-full bg-black/40 px-3 py-2 ring-1 ring-white/20 text-[#fcf8e6]">›</button>
       </div>
     </div>
   </section>
-  
-  <script>
-    document.addEventListener("DOMContentLoaded", function () {
-      let interval = setInterval(function () {
-        // look for the Elfsight branding link and remove it
-        let elfsightBranding = document.querySelector('a[href*="elfsight.com/instagram-feed"]');
-        if (elfsightBranding) {
-          elfsightBranding.remove();
-          clearInterval(interval); // stop checking once removed
-        }
-      }, 500);
-    });
 
   <!-- REVIEWS -->
   <section id="reviews" class="mx-auto max-w-7xl px-4 py-16 scroll-mt-24">
@@ -346,11 +343,11 @@
       const el = document.getElementById(id);
       el && el.scrollBy({ left: dir * el.clientWidth * 0.9, behavior: 'smooth' });
     }
-  
+
     // auto-update footer year
     document.getElementById('y').textContent = new Date().getFullYear();
-  
-    // Book buttons (barber booking links)
+
+    // Book buttons
     const BOOK = {
       fernando: 'https://getsquire.com/booking/book/fernandoughfades-sherman/barber/fernando-jimenez-1/services?utm_source=site&utm_medium=book_button&utm_campaign=fernando',
       issac:    'https://getsquire.com/booking/book/isaac-blends-hutchins/barber/isaac-castillo-1/services?utm_source=site&utm_medium=book_button&utm_campaign=issac',
@@ -359,25 +356,21 @@
     };
     document.querySelectorAll('[data-book]').forEach(btn => {
       const id = btn.dataset.book;
-      btn.href = BOOK[id];
-      btn.target = '_blank';
-      btn.rel = 'noopener';
+      btn.href = BOOK[id]; btn.target = '_blank'; btn.rel = 'noopener';
     });
-  
+
     // ===== Single-open accordion (services & pricing) =====
-    const cards = [...document.querySelectorAll('.barber-card')];
-  
-    // start closed
-    cards.forEach(c => c.querySelector('.svc-toggle')?.setAttribute('aria-expanded', 'false'));
-  
+    const cardsAccordion = [...document.querySelectorAll('.barber-card')];
+    cardsAccordion.forEach(c => c.querySelector('.svc-toggle')?.setAttribute('aria-expanded', 'false'));
+
     function closeAll(){
-      cards.forEach(c => {
+      cardsAccordion.forEach(c => {
         c.classList.remove('is-open');
         c.querySelector('.svc-toggle')?.setAttribute('aria-expanded','false');
       });
     }
-  
-    cards.forEach(card => {
+
+    cardsAccordion.forEach(card => {
       const btn = card.querySelector('.svc-toggle');
       btn.addEventListener('click', () => {
         const wasOpen = card.classList.contains('is-open');
@@ -395,28 +388,44 @@
       });
     });
   </script>
-  <script>
-    // Masonry sizing — must match #teamGrid { grid-auto-rows: 4px }
-    const ROW = 4; // px
-    const grid = document.getElementById('teamGrid');
-    const cards = [...grid.querySelectorAll('.barber-card')];
-  
-    function setSpan(card){
-      // Add a small fudge so borders/shadows don’t wrap
-      const h = card.getBoundingClientRect().height + 2;
-      const rows = Math.ceil(h / ROW);
-      card.style.setProperty('--rows', rows);
-    }
-  
-    // Observe size changes (open/close, images loading, responsive)
-    const ro = new ResizeObserver(entries => {
-      for (const e of entries) setSpan(e.target);
-    });
-    cards.forEach(c => { setSpan(c); ro.observe(c); });
-  
-    // Also recalc on window resize (safe belt)
-    window.addEventListener('resize', () => cards.forEach(setSpan));
-  </script>
 
+  <script>
+    // Masonry sizing — MUST match #teamGrid { grid-auto-rows: 4px }
+    document.addEventListener('DOMContentLoaded', () => {
+      const grid = document.getElementById('teamGrid');
+      if (!grid) return;
+
+      // Read actual row size & gap from computed styles (works cross-browser)
+      const cs = getComputedStyle(grid);
+      const ROW = parseFloat(cs.getPropertyValue('grid-auto-rows')) || 4;
+      const GAP = parseFloat(cs.getPropertyValue('row-gap')) || 0;
+
+      const items = [...grid.querySelectorAll('.barber-card')];
+
+      function setSpan(el){
+        const h = el.getBoundingClientRect().height;
+        // Include the gap in both numerator and denominator to avoid Firefox over-span
+        const rows = Math.ceil( (h + GAP) / (ROW + GAP) );
+        el.style.setProperty('--rows', rows);
+      }
+
+      // Observe changes (accordion open/close, responsive, etc.)
+      const ro = new ResizeObserver(entries => {
+        for (const e of entries) setSpan(e.target);
+      });
+
+      items.forEach(el => {
+        // Recalc when images load
+        el.querySelectorAll('img').forEach(img => {
+          if (!img.complete) img.addEventListener('load', () => setSpan(el), {once:true});
+        });
+        setSpan(el);
+        ro.observe(el);
+      });
+
+      // Safety: on resize, recompute all
+      window.addEventListener('resize', () => items.forEach(setSpan));
+    });
+  </script>
 </body>
 </html>
