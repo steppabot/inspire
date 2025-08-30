@@ -8,13 +8,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=League+Spartan:wght@600;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+    :root { --bg:#0b0b0d; --card:#121216; --muted:#a4a7ac; --accent:#1f3e26; --ring:#009923; }
+
+    html { scroll-behavior:smooth; }
 
     body{
       font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
       color:#fff;
-    
-      /* Slightly stronger + bigger spot */
-      background-color:#000; /* base */
+
+      /* Subtle, anchored “spot” gradient */
+      background-color:#000;
       background-image:
         radial-gradient(ellipse 1100px 600px at 50% 6%,
           rgba(31, 62, 38, 0.40) 0%,
@@ -22,82 +25,56 @@
           rgba(31, 62, 38, 0.00) 72%);
       background-attachment: fixed;
     }
-    
-    :root { --bg:#0b0b0d; --card:#121216; --muted:#a4a7ac; --accent:#1f3e26; --ring:#284d30; }
-    html { scroll-behavior:smooth; }
-    
-    /* Veil-like zoom + strong ring + outer glow (no inner gradient) */
+
+    .title { font-family: "League Spartan", Inter, sans-serif; }
+    .grain { position:relative; }
+    .grain::after { content:""; position:absolute; inset:0; pointer-events:none; opacity:.06; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>'); mix-blend-mode:soft-light; }
+    .tag { border:1px solid rgba(255,255,255,.12); padding:.25rem .5rem; border-radius:.5rem; font-size:.75rem; color:#e7e7ea; }
+    a, button, input, textarea { outline-offset: 2px; }
+
+    /* ===========================
+       Barber cards (Veil-style)
+       =========================== */
     .barber-card{
       position: relative;
       isolation: isolate;
       background: var(--card);
-      border-radius: 1rem;                      /* = rounded-2xl */
+      border-radius: 1rem;                      /* rounded-2xl */
       box-shadow: 0 0 0 1px rgba(255,255,255,.10);
       transform: translateY(0) scale(1);
       transform-origin: center;
       transition: transform .26s ease, box-shadow .26s ease, filter .26s ease;
       will-change: transform, box-shadow;
     }
-    
-    /* SOLID stroke on top of the card */
+    /* Solid ring shown on hover/focus */
     .barber-card::after{
       content:"";
-      position:absolute; inset:0;               /* exactly on the edge */
+      position:absolute; inset:0;
       border-radius: inherit;
-      border: 3px solid var(--ring);            /* <- #009923 ring */
-      opacity: 0;                               /* off until hover */
+      border: 3px solid var(--ring);
+      opacity: 0;
       transition: opacity .22s ease;
       pointer-events: none;
-      z-index: 1;                               /* above content */
+      z-index: 1;
     }
-    
-    /* Compact Veil-style hover: tight glow + small zoom */
+    /* Compact halo + zoom */
     .barber-card:hover,
     .barber-card:focus-within{
       transform: translateY(-3px) scale(1.035);
-      /* keep a thin base border so edges stay crisp */
       box-shadow: 0 0 0 1px rgba(255,255,255,.08);
-      /* bottom-biased, contained halo (short blur, medium opacity) */
       filter:
-        drop-shadow(0 14px 26px rgba(0,153,35,.42))  /* primary**
+        drop-shadow(0 14px 26px rgba(0,153,35,.42))  /* primary */
         drop-shadow(0 6px 14px  rgba(0,153,35,.30))  /* mid */
         drop-shadow(0 3px 6px   rgba(0,0,0,.40));    /* depth */
     }
-    
-    /* ensure the solid ring is visible on hover/focus */
     .barber-card:hover::after,
     .barber-card:focus-within::after{
       opacity: 1;
     }
-    
-    /* reduced motion */
-    @media (prefers-reduced-motion: reduce){
-      .barber-card, .barber-card::after{ transition: none; }
-    }
-    .title { font-family: "League Spartan", Inter, sans-serif; }
-    .grain { position:relative; }
-    .grain::after { content:""; position:absolute; inset:0; pointer-events:none; opacity:.06; background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="n"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23n)"/></svg>'); mix-blend-mode:soft-light; }
-    .tag { border:1px solid rgba(255,255,255,.12); padding:.25rem .5rem; border-radius:.5rem; font-size:.75rem; color:#e7e7ea; }
-    a, button, input, textarea { outline-offset: 2px; }
-    /* Veil-style faint ring around cards */
-    .barber-card{
-      background: var(--card);
-      border-radius: 1rem;               /* matches rounded-2xl */
-      box-shadow: 0 0 0 1px rgba(255,255,255,.10);  /* default subtle border */
-      transition: box-shadow .2s ease, transform .2s ease;
-    }
-    .barber-card:hover,
-    .barber-card:focus-within{
-      /* #0d5317 with 0x44 alpha ≈ 0.27 */
-      box-shadow:
-        0 0 0 2px rgba(13,83,23,.27),    /* the “ring” */
-        0 10px 24px rgba(13,83,23,.14);  /* soft outer glow */
-      transform: translateY(-1px);
-    }
 
+    /* Chevron animation for <details> */
     details .chev{ transition: transform .2s ease; }
     details[open] .chev{ transform: rotate(180deg); }
-
   </style>
 </head>
 <body class="antialiased">
@@ -106,7 +83,7 @@
     <a href="#team" class="block text-center py-3 bg-[var(--accent)] text-[#fcf8e6] font-semibold">Book Now</a>
   </div>
 
-  <!-- HERO with floating nav; hero image already contains the wordmark -->
+  <!-- HERO -->
   <section id="top" class="relative h-[88vh] min-h-[560px] overflow-hidden grain">
     <div class="absolute inset-0 -z-10">
       <img src="images/inspirehairstudiomainlogo.png"
@@ -126,10 +103,7 @@
       <a href="#team" class="hover:text-white font-semibold">book now</a>
     </nav>
 
-    <!-- Spacer only (no overlay text) -->
     <div class="relative mx-auto max-w-7xl px-4 pt-24 md:pt-28"></div>
-
-    <!-- Scroll cue -->
     <div class="absolute bottom-6 inset-x-0 flex justify-center text-white/70 text-xs">scroll</div>
   </section>
 
@@ -142,7 +116,7 @@
 
     <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
       <!-- Fernando -->
-        <article class="barber-card group rounded-2xl overflow-hidden">
+      <article class="barber-card group rounded-2xl overflow-hidden">
         <img src="images/inspirehairstuidiofernando.png" alt="Fernando — Inspire Hair Studio" class="h-56 w-full object-cover" />
         <div class="p-5">
           <div class="flex items-start justify-between gap-3">
@@ -152,10 +126,10 @@
             </div>
             <a data-book="fernando" class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-[#fcf8e6] font-semibold">Book</a>
           </div>
-          <details class="mt-4 group">
+          <details class="mt-4">
             <summary class="cursor-pointer select-none flex items-center justify-between py-2">
               <span class="font-semibold">Services & Pricing</span>
-              <svg class="chev transition-transform" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </summary>
             <ul class="mt-2 space-y-3 text-sm">
               <li class="flex items-start justify-between">
@@ -178,7 +152,7 @@
       </article>
 
       <!-- Issac -->
-        <article class="barber-card group rounded-2xl overflow-hidden">
+      <article class="barber-card group rounded-2xl overflow-hidden">
         <img src="images/inspirehairstuidioissac.png" alt="Issac — Inspire Hair Studio" class="h-56 w-full object-cover" />
         <div class="p-5">
           <div class="flex items-start justify-between gap-3">
@@ -186,12 +160,12 @@
               <h3 class="font-semibold text-lg">Issac</h3>
               <p class="text-sm text-[var(--muted)]">Shears • Tapers • Long hair</p>
             </div>
-            <a data-book="issac"    class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-[#fcf8e6] font-semibold">Book</a>
+            <a data-book="issac" class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-[#fcf8e6] font-semibold">Book</a>
           </div>
-          <details class="mt-4 group">
+          <details class="mt-4">
             <summary class="cursor-pointer select-none flex items-center justify-between py-2">
               <span class="font-semibold">Services & Pricing</span>
-              <svg class="chev transition-transform" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </summary>
             <ul class="mt-2 space-y-3 text-sm">
               <li class="flex items-center justify-between"><span>Scissor Cut</span><span class="text-white/90">$42</span></li>
@@ -203,7 +177,7 @@
       </article>
 
       <!-- Jovani -->
-        <article class="barber-card group rounded-2xl overflow-hidden">
+      <article class="barber-card group rounded-2xl overflow-hidden">
         <img src="images/inspirehairstuidiojovani.png" alt="Jovani — Inspire Hair Studio" class="h-56 w-full object-cover" />
         <div class="p-5">
           <div class="flex items-start justify-between gap-3">
@@ -211,12 +185,12 @@
               <h3 class="font-semibold text-lg">Jovani</h3>
               <p class="text-sm text-[var(--muted)]">Designs • Razor work • Detail fades</p>
             </div>
-            <a data-book="jovani"   class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-[#fcf8e6] font-semibold">Book</a>
+            <a data-book="jovani" class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-[#fcf8e6] font-semibold">Book</a>
           </div>
-          <details class="mt-4 group">
+          <details class="mt-4">
             <summary class="cursor-pointer select-none flex items-center justify-between py-2">
               <span class="font-semibold">Services & Pricing</span>
-              <svg class="chev transition-transform" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </summary>
             <ul class="mt-2 space-y-3 text-sm">
               <li class="flex items-center justify-between"><span>Signature Cut</span><span class="text-white/90">$40</span></li>
@@ -228,7 +202,7 @@
       </article>
 
       <!-- Junior -->
-        <article class="barber-card group rounded-2xl overflow-hidden">
+      <article class="barber-card group rounded-2xl overflow-hidden">
         <img src="images/juniortest2.png" alt="Junior — Inspire Hair Studio" class="h-56 w-full object-cover" />
         <div class="p-5">
           <div class="flex items-start justify-between gap-3">
@@ -236,12 +210,12 @@
               <h3 class="font-semibold text-lg">Junior</h3>
               <p class="text-sm text-[var(--muted)]">Classic cuts • Tapers • Beards</p>
             </div>
-            <a data-book="junior"   class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-[#fcf8e6] font-semibold">Book</a>
+            <a data-book="junior" class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-[#fcf8e6] font-semibold">Book</a>
           </div>
-          <details class="mt-4 group">
+          <details class="mt-4">
             <summary class="cursor-pointer select-none flex items-center justify-between py-2">
               <span class="font-semibold">Services & Pricing</span>
-              <svg class="chev transition-transform" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              <svg class="chev" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
             </summary>
             <ul class="mt-2 space-y-3 text-sm">
               <li class="flex items-center justify-between"><span>Signature Cut</span><span class="text-white/90">$38</span></li>
@@ -254,7 +228,7 @@
     </div>
   </section>
 
-  <!-- INSTAGRAM (carousel via CSS scroll-snap + arrows) -->
+  <!-- INSTAGRAM -->
   <section id="instagram" class="mx-auto max-w-7xl px-4 py-16 scroll-mt-24">
     <header class="mb-8 flex items-end justify-between">
       <div>
@@ -266,7 +240,6 @@
     <div class="relative">
       <div id="igCarousel" class="flex gap-3 overflow-x-auto scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none]" style="scrollbar-width:none;">
         <style>#igCarousel::-webkit-scrollbar{display:none}</style>
-        <!-- Drop in 1:1 or 4:5 images -->
         <a class="shrink-0 snap-start"><img src="images/ig1.png" alt="Cut" class="h-72 w-72 object-cover rounded-xl"></a>
         <a class="shrink-0 snap-start"><img src="images/ig2.png" alt="Cut" class="h-72 w-72 object-cover rounded-xl"></a>
         <a class="shrink-0 snap-start"><img src="images/ig3.png" alt="Cut" class="h-72 w-72 object-cover rounded-xl"></a>
@@ -281,7 +254,7 @@
     </div>
   </section>
 
-  <!-- REVIEWS carousel -->
+  <!-- REVIEWS -->
   <section id="reviews" class="mx-auto max-w-7xl px-4 py-16 scroll-mt-24">
     <header class="mb-8">
       <h2 class="title text-3xl md:text-4xl">Reviews</h2>
@@ -348,45 +321,47 @@
     }
     document.getElementById('y').textContent = new Date().getFullYear();
   </script>
-<script>
-  document.querySelectorAll('.barber-card').forEach(card=>{
-    card.addEventListener('pointermove', e=>{
-      const r = card.getBoundingClientRect();
-      card.style.setProperty('--glow-x', ((e.clientX - r.left) / r.width * 100) + '%');
-      card.style.setProperty('--glow-y', ((e.clientY - r.top) / r.height * 100) + '%');
-    });
-    card.addEventListener('pointerleave', ()=>{
-      card.style.removeProperty('--glow-x');
-      card.style.removeProperty('--glow-y');
-    });
-  });
-</script>
-<script>
-  const BOOK = {
-    fernando: 'https://getsquire.com/booking/book/fernandoughfades-sherman/barber/fernando-jimenez-1/services?utm_source=site&utm_medium=book_button&utm_campaign=fernando',
-    issac:    'https://getsquire.com/booking/book/isaac-blends-hutchins/barber/isaac-castillo-1/services?utm_source=site&utm_medium=book_button&utm_campaign=issac',
-    jovani:   'https://headscapestudios.square.site/?utm_source=site&utm_medium=book_button&utm_campaign=jovani',
-    junior:   'https://book.squareup.com/appointments/fwywz2fah3c0rm/location/L5GGFA5P9058F/services?utm_source=site&utm_medium=book_button&utm_campaign=junior'
-  };
 
-  // apply to all Book buttons by data attribute
-  document.querySelectorAll('[data-book]').forEach(btn => {
-    const id = btn.dataset.book;
-    btn.href = BOOK[id];
-    btn.target = '_blank';
-    btn.rel = 'noopener';
-  });
-</script>
-<script>
-  // Accordion: only one Services & Pricing open at a time
-  const cards = document.querySelectorAll('#team details');
-  cards.forEach(d => {
-    d.addEventListener('toggle', () => {
-      if (d.open) {
-        cards.forEach(other => { if (other !== d) other.open = false; });
-      }
+  <!-- Book buttons: open in new tab -->
+  <script>
+    const BOOK = {
+      fernando: 'https://getsquire.com/booking/book/fernandoughfades-sherman/barber/fernando-jimenez-1/services?utm_source=site&utm_medium=book_button&utm_campaign=fernando',
+      issac:    'https://getsquire.com/booking/book/isaac-blends-hutchins/barber/isaac-castillo-1/services?utm_source=site&utm_medium=book_button&utm_campaign=issac',
+      jovani:   'https://headscapestudios.square.site/?utm_source=site&utm_medium=book_button&utm_campaign=jovani',
+      junior:   'https://book.squareup.com/appointments/fwywz2fah3c0rm/location/L5GGFA5P9058F/services?utm_source=site&utm_medium=book_button&utm_campaign=junior'
+    };
+    document.querySelectorAll('[data-book]').forEach(btn => {
+      const id = btn.dataset.book;
+      btn.href = BOOK[id];
+      btn.target = '_blank';
+      btn.rel = 'noopener';
     });
-  });
-</script>
+  </script>
+
+  <!-- Accordion: only one details open -->
+  <script>
+    const team = document.getElementById('team');
+
+    // Close siblings immediately on summary click (prevents flash of multiple)
+    team.addEventListener('click', (e) => {
+      const summary = e.target.closest('summary');
+      if (!summary) return;
+      const current = summary.parentElement; // <details>
+      team.querySelectorAll('details').forEach(d => {
+        if (d !== current) d.removeAttribute('open');
+      });
+    });
+
+    // Also enforce via toggle for keyboard/programmatic opens
+    team.querySelectorAll('details').forEach(d => {
+      d.addEventListener('toggle', () => {
+        if (d.open) {
+          team.querySelectorAll('details').forEach(other => {
+            if (other !== d) other.removeAttribute('open');
+          });
+        }
+      });
+    });
+  </script>
 </body>
 </html>
