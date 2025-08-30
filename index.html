@@ -279,15 +279,15 @@
   </section>
   
   <script>
-    // Remove Elfsight branding (robust: works when widget renders later)
     (function removeElfsightBranding(){
       const SELECTORS = [
         'a[href*="elfsight.com"]',
+        'a[href*="instagram-feed"]',
+        'a[href*="google-reviews-widget"]',
         '.eapps-widget__footer',
         '.eapps-link',
         '[data-elfsight-link]'
       ];
-  
       function strip(root=document){
         let removed = false;
         SELECTORS.forEach(sel => {
@@ -295,48 +295,29 @@
         });
         return removed;
       }
-  
-      // Try immediately, then on DOM changes, plus an interval fallback
-      const stopInterval = setInterval(() => { if (strip()) clearInterval(stopInterval); }, 500);
-  
+      const interval = setInterval(() => { if (strip()) clearInterval(interval); }, 500);
       const mo = new MutationObserver(muts => {
-        for (const m of muts){
-          if (m.addedNodes && m.addedNodes.length){
-            m.addedNodes.forEach(n => {
-              if (n.nodeType === 1) { // element
-                if (strip(n)) { /* branding removed */ }
-              }
-            });
-          }
-        }
+        muts.forEach(m => m.addedNodes && m.addedNodes.forEach(n => n.nodeType===1 && strip(n)));
       });
       mo.observe(document.body, { childList: true, subtree: true });
-  
-      // Safety stop after 30s
-      setTimeout(() => clearInterval(stopInterval), 30000);
+      setTimeout(() => clearInterval(interval), 30000);
     })();
   </script>
-
+  
   <!-- REVIEWS -->
   <section id="reviews" class="mx-auto max-w-7xl px-4 py-16 scroll-mt-24">
     <header class="mb-8">
       <h2 class="title text-3xl md:text-4xl">Reviews</h2>
       <p class="text-[var(--muted)] mt-2">What clients are saying.</p>
     </header>
-    <div class="relative">
-      <div id="revCarousel" class="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory [scrollbar-width:none]"><style>#revCarousel::-webkit-scrollbar{display:none}</style>
-        <blockquote class="shrink-0 snap-start w-[85%] md:w-[45%] rounded-2xl bg-[var(--card)] ring-1 ring-white/10 p-6"><p>“Best fade I’ve had in years. Attention to detail is crazy.”</p><span class="block mt-3 text-sm text-[var(--muted)]">— A.G.</span></blockquote>
-        <blockquote class="shrink-0 snap-start w-[85%] md:w-[45%] rounded-2xl bg-[var(--card)] ring-1 ring-white/10 p-6"><p>“Clean studio, on time, and the beard lineup is perfect.”</p><span class="block mt-3 text-sm text-[var(--muted)]">— R.M.</span></blockquote>
-        <blockquote class="shrink-0 snap-start w-[85%] md:w-[45%] rounded-2xl bg-[var(--card)] ring-1 ring-white/10 p-6"><p>“Booking is easy and the results are consistent. 10/10.”</p><span class="block mt-3 text-sm text-[var(--muted)]">— K.S.</span></blockquote>
-      </div>
-      <div class="pointer-events-none absolute inset-y-0 left-0 right-0 flex items-center justify-between">
-        <button onclick="scrollByCard('revCarousel',-1)" class="pointer-events-auto ml-[-8px] rounded-full bg-black/40 px-3 py-2 ring-1 ring-white/20 text-[#fcf8e6]">‹</button>
-        <button onclick="scrollByCard('revCarousel',1)" class="pointer-events-auto mr-[-8px] rounded-full bg-black/40 px-3 py-2 ring-1 ring-white/20 text-[#fcf8e6]">›</button>
-      </div>
-      <div class="mt-6"><a href="YOUR_GOOGLE_REVIEWS_URL" class="text-[var(--accent)] hover:underline">See more on Google</a></div>
-    </div>
+  
+    <!-- Elfsight Google Reviews -->
+    <!-- Omit this next line if platform.js is already on the page from Gallery -->
+    <!-- <script src="https://elfsightcdn.com/platform.js" async></script> -->
+    <div class="elfsight-app-1f9376d2-cd21-4860-b3c5-bc9e1ad65ac6" data-elfsight-app-lazy></div>
   </section>
-
+  
+    
   <!-- LOCATION -->
   <section id="location" class="mx-auto max-w-7xl px-4 py-16 scroll-mt-24">
     <header class="mb-8">
