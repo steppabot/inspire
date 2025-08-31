@@ -384,8 +384,39 @@
     });
   </script>
 
+  <script>
+    // Masonry sizing — MUST match #teamGrid { grid-auto-rows: 4px }
+    document.addEventListener('DOMContentLoaded', () => {
+      const grid = document.getElementById('teamGrid');
+      if (!grid) return;
   
-      // Safety: on resize, recompute all
+      // Read actual row size & gap from computed styles (cross-browser)
+      const cs  = getComputedStyle(grid);
+      const ROW = parseFloat(cs.getPropertyValue('grid-auto-rows')) || 4;
+      const GAP = parseFloat(cs.getPropertyValue('row-gap'))        || 0;
+  
+      const items = [...grid.querySelectorAll('.barber-card')];
+  
+      function setSpan(el){
+        const h = el.getBoundingClientRect().height;
+        const rows = Math.ceil((h + GAP) / (ROW + GAP));
+        el.style.setProperty('--rows', rows);
+      }
+  
+      // Observe size changes (open/close, images, responsive)
+      const ro = new ResizeObserver(entries => {
+        for (const e of entries) setSpan(e.target);
+      });
+  
+      items.forEach(el => {
+        el.querySelectorAll('img').forEach(img => {
+          if (!img.complete) img.addEventListener('load', () => setSpan(el), { once:true });
+        });
+        setSpan(el);
+        ro.observe(el);
+      });
+  
+      // Safety: recompute on resize
       window.addEventListener('resize', () => items.forEach(setSpan));
     });
   </script>
