@@ -425,19 +425,30 @@
   <script src="https://elfsightcdn.com/platform.js"></script>
   
   <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const SEL = '.eapps-widget .eapps-widget__footer, .eapps-widget a[href*="elfsight.com"]';
-    const hide = (root=document) => {
-      root.querySelectorAll(SEL).forEach(el => { el.style.display = 'none'; });
-    };
+      document.addEventListener("DOMContentLoaded", function() {
+          // Function to target the Elfsight branding link and hide it
+          function removeElfsightBranding() {
+              var elfsightLink = document.querySelector('a[href*="elfsight.com/google-reviews-widget"]');
+              if (elfsightLink) {
+                  // Hide the branding link by setting display to none
+                  elfsightLink.style.display = 'none';
+              }
+          }
   
-    hide(); // initial
-    new MutationObserver(muts => {
-      muts.forEach(m => m.addedNodes && m.addedNodes.forEach(n => {
-        if (n.nodeType === 1) hide(n);
-      }));
-    }).observe(document.body, { childList: true, subtree: true });
-  });
+          // Initial check when the DOM content is loaded
+          removeElfsightBranding();
+  
+          // Use MutationObserver to detect when elements are added to the DOM
+          var observer = new MutationObserver(function() {
+              removeElfsightBranding();
+          });
+  
+          // Start observing the body for changes
+          observer.observe(document.body, { childList: true, subtree: true });
+  
+          // Set an interval to check every second to catch dynamic loads
+          setInterval(removeElfsightBranding, 1000);
+      });
   </script>
 </body>
 </html>
