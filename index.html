@@ -450,5 +450,32 @@
           setInterval(removeElfsightBranding, 1000);
       });
   </script>
+  <script>
+      document.addEventListener("DOMContentLoaded", function() {
+          // Function to target the Elfsight branding link and hide it
+          function removeElfsightBranding() {
+              var elfsightLink = document.querySelector('a[href*="elfsight.com/instagram-feed-instashow"]');
+              if (elfsightLink) {
+                  // Hide the branding link by setting display to none
+                  elfsightLink.style.display = 'none';
+              }
+          }
+  
+          // Initial check when the DOM content is loaded
+          removeElfsightBranding();
+  
+          // Use MutationObserver to detect when elements are added to the DOM
+          var observer = new MutationObserver(function() {
+              removeElfsightBranding();
+          });
+  
+          // Start observing the body for changes
+          observer.observe(document.body, { childList: true, subtree: true });
+  
+          // Set an interval to check every second to catch dynamic loads
+          setInterval(removeElfsightBranding, 1000);
+      });
+  </script>
+
 </body>
 </html>
