@@ -3,17 +3,16 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Inspire Hair Studio in Sherman, TX. Book with our Barbers, Browse our Work, Read Reviews, Find our Location, and Contact Us."/>
+  <meta name="description" content="Inspire Hair Studio in Sherman, TX. Book with our barbers, browse our work, read reviews, find our location, and contact us."/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=League+Spartan:wght@600;800&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
-
 
   <style>
     :root{
       --card:#121216;
       --muted:#a4a7ac;
-      --accent:#1f3e26;      
+      --accent:#1f3e26;
       --stroke:#2c5936;      /* ring color */
     }
 
@@ -36,20 +35,19 @@
 
     a,button,input,textarea{ outline-offset:2px; }
 
-  
-    .elfsight-container .eapps-instagram-feed, 
+    .elfsight-container .eapps-instagram-feed,
     .elfsight-container [class*="eapps-"] { border-radius: 0.75rem; overflow: hidden; }
-      
+
     /* Card */
     .barber-card{
       position:relative; isolation:isolate; background:var(--card);
       border-radius:1rem; box-shadow:0 0 0 1px rgba(255,255,255,.10);
       transform:translateY(0) scale(1);
       transition:transform .26s ease, box-shadow .26s ease, filter .26s ease;
-      display:flex;               /* for internal layout */
+      display:flex;
       flex-direction:column;
-      grid-row: span var(--rows, 1);  /* masonry span */
-      overflow:hidden;                /* inline panel; no overlay */
+      grid-row: span var(--rows, 1);
+      overflow:hidden;
     }
     .barber-card::after{
       content:""; position:absolute; inset:0; border-radius:inherit;
@@ -91,9 +89,8 @@
     #instagram {
       background: #0e1713;
       padding: 4rem 1rem;
-      border-top: 1px solid rgba(255,255,255,0.08); /* optional subtle line */
+      border-top: 1px solid rgba(255,255,255,0.08);
     }
-
   </style>
 </head>
 <body class="antialiased">
@@ -102,26 +99,79 @@
     <a href="#team" class="block text-center py-3 bg-[var(--accent)] text-[#fcf8e6] font-semibold">Book Now</a>
   </div>
 
+  <!-- ===================== HEADER (new) ===================== -->
+  <header class="absolute inset-x-0 top-0 z-30">
+    <div class="mx-auto max-w-7xl px-4">
+      <div class="h-16 flex items-center justify-between">
+        <!-- Logo / Brand -->
+        <a href="#top" class="flex items-center gap-3">
+          <img src="images/inspirehairstudiomainlogo.png" alt="Inspire Hair Studio" class="h-8 w-auto object-contain">
+          <span class="sr-only">Inspire Hair Studio</span>
+        </a>
+
+        <!-- Desktop nav -->
+        <nav class="hidden md:flex items-center gap-8 text-sm text-white/80">
+          <a href="#team" class="hover:text-white">our team</a>
+          <a href="#instagram" class="hover:text-white">gallery</a>
+          <a href="#reviews" class="hover:text-white">reviews</a>
+          <a href="#location" class="hover:text-white">location</a>
+          <a href="#contact" class="hover:text-white">contact</a>
+          <a href="#team" class="inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-[#fcf8e6] font-semibold">book now</a>
+        </nav>
+
+        <!-- Mobile hamburger -->
+        <button id="menuBtn"
+                class="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-lg ring-1 ring-white/10 bg-black/30 backdrop-blur"
+                aria-label="Open menu" aria-expanded="false">
+          <!-- 3 lines -->
+          <svg id="menuIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white/90">
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+          <!-- X icon (hidden by default) -->
+          <svg id="closeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+               class="hidden text-white/90">
+            <line x1="18" y1="6" x2="6" y2="18"></line>
+            <line x1="6" y1="6" x2="18" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu (hidden by default) -->
+    <div id="mobileMenu" class="md:hidden hidden">
+      <div class="mx-auto max-w-7xl px-4 pb-4">
+        <div class="rounded-2xl bg-[var(--card)]/95 ring-1 ring-white/10 backdrop-blur p-4">
+          <nav class="grid gap-2 text-base">
+            <a href="#team" class="px-3 py-2 rounded-lg hover:bg-white/5">our team</a>
+            <a href="#instagram" class="px-3 py-2 rounded-lg hover:bg-white/5">gallery</a>
+            <a href="#reviews" class="px-3 py-2 rounded-lg hover:bg-white/5">reviews</a>
+            <a href="#location" class="px-3 py-2 rounded-lg hover:bg-white/5">location</a>
+            <a href="#contact" class="px-3 py-2 rounded-lg hover:bg-white/5">contact</a>
+            <a href="#team" class="mt-2 inline-flex items-center justify-center rounded-xl bg-[var(--accent)] px-4 py-3 text-[#fcf8e6] font-semibold">book now</a>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </header>
+  <!-- ======================================================= -->
+
   <!-- HERO -->
-  <section id="top" class="relative h-[105vh] md:h-[115vh] min-h-[720px] overflow-hidden grain">
+  <section id="top" class="relative h-[100vh] md:h-[115vh] min-h-[640px] overflow-hidden grain">
     <div class="absolute inset-0 -z-10">
       <img
         src="images/inspirehairstudiomainlogo.png"
         alt="Three barbers against a minimalist wall at Inspire Hair Studio"
         class="w-full h-full object-cover"
         style="object-position:center 12%;" />
-      <!-- removed the gradient overlay for full opacity -->
+      <!-- subtle dark overlay on small screens to help legibility -->
+      <div class="absolute inset-0 bg-black/30 md:bg-transparent"></div>
     </div>
-  
-    <nav class="absolute inset-x-0 top-6 z-20 flex items-center justify-center gap-8 text-sm text-white/80">
-      <a href="#team" class="hover:text-white">our team</a>
-      <a href="#instagram" class="hover:text-white">gallery</a>
-      <a href="#reviews" class="hover:text-white">reviews</a>
-      <a href="#location" class="hover:text-white">location</a>
-      <a href="#contact" class="hover:text-white">contact</a>
-      <a href="#team" class="hover:text-white font-semibold">book now</a>
-    </nav>
-  
+
+    <!-- (old absolute nav removed; header above handles both mobile/desktop) -->
     <div class="relative mx-auto max-w-7xl px-4 pt-24 md:pt-28"></div>
     <div class="absolute bottom-6 inset-x-0 flex justify-center text-white/70 text-xs">scroll</div>
   </section>
@@ -186,7 +236,7 @@
             </div>
             <a data-book="issac" class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-[#fcf8e6] font-semibold">Book</a>
           </div>
-      
+
           <div class="svc mt-4">
             <button class="svc-toggle" type="button" aria-expanded="false" aria-controls="p-issac">
               <span class="flex items-center gap-2 font-semibold">
@@ -242,7 +292,7 @@
             </div>
             <a data-book="jovani" class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-[#fcf8e6] font-semibold">Book</a>
           </div>
-      
+
           <div class="svc mt-4">
             <button class="svc-toggle" type="button" aria-expanded="false" aria-controls="p-jovani">
               <span class="flex items-center gap-2 font-semibold">
@@ -297,7 +347,7 @@
             </div>
             <a data-book="junior" class="shrink-0 inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-[#fcf8e6] font-semibold">Book</a>
           </div>
-      
+
           <div class="svc mt-4">
             <button class="svc-toggle" type="button" aria-expanded="false" aria-controls="p-junior">
               <span class="flex items-center gap-2 font-semibold">
@@ -354,32 +404,27 @@
     </div>
   </section>
 
-  
-  <!-- INSTAGRAM / GALLERY (full-width band) -->
+  <!-- INSTAGRAM / GALLERY -->
   <section id="instagram" class="scroll-mt-24 bg-[#0e1713] py-16">
     <div class="mx-auto max-w-7xl px-4">
       <header class="mb-8">
         <h2 class="title text-3xl md:text-4xl">GALLERY</h2>
         <p class="text-[var(--muted)] mt-2">From our Instagram.</p>
       </header>
-  
-      <!-- Elfsight Instagram Feed -->
-      
+
       <div class="elfsight-container">
         <div class="elfsight-app-86bf5540-d345-4605-bf3e-eafa0d1ca237" data-elfsight-app-lazy></div>
       </div>
     </div>
   </section>
-  
-  
+
   <!-- REVIEWS -->
   <section id="reviews" class="mx-auto max-w-7xl px-4 py-16 scroll-mt-24">
     <header class="mb-8">
       <h2 class="title text-3xl md:text-4xl">REVIEWS</h2>
       <p class="text-[var(--muted)] mt-2">What clients are saying.</p>
     </header>
-  
-    <!-- Elfsight Google Reviews -->
+
     <div class="elfsight-app-1f9376d2-cd21-4860-b3c5-bc9e1ad65ac6" data-elfsight-app-lazy></div>
   </section>
 
@@ -475,30 +520,89 @@
     });
   </script>
 
+  <!-- Mobile menu toggle + body lock -->
   <script>
-    // Masonry sizing — MUST match #teamGrid { grid-auto-rows: 4px }
+    (function () {
+      const btn = document.getElementById('menuBtn');
+      const menu = document.getElementById('mobileMenu');
+      const openIcon  = document.getElementById('menuIcon');
+      const closeIcon = document.getElementById('closeIcon');
+
+      function lockBody(lock) {
+        if (lock) {
+          document.body.style.overflow = 'hidden';
+          document.body.style.touchAction = 'none';
+        } else {
+          document.body.style.overflow = '';
+          document.body.style.touchAction = '';
+        }
+      }
+
+      btn?.addEventListener('click', () => {
+        const isOpen = btn.getAttribute('aria-expanded') === 'true';
+        const next = !isOpen;
+        btn.setAttribute('aria-expanded', String(next));
+        menu.classList.toggle('hidden', !next);
+        openIcon.classList.toggle('hidden', next);
+        closeIcon.classList.toggle('hidden', !next);
+        lockBody(next);
+      });
+
+      // Close on link click (better UX)
+      document.querySelectorAll('#mobileMenu a').forEach(a => {
+        a.addEventListener('click', () => {
+          btn.setAttribute('aria-expanded', 'false');
+          menu.classList.add('hidden');
+          openIcon.classList.remove('hidden');
+          closeIcon.classList.add('hidden');
+          lockBody(false);
+        });
+      });
+    })();
+  </script>
+
+  <!-- Load Elfsight AFTER both widget containers exist (no async) -->
+  <script src="https://elfsightcdn.com/platform.js"></script>
+
+  <!-- Hide Elfsight branding (best-effort) -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      function hideBrand(selector){
+        var el = document.querySelector(selector);
+        if (el) el.style.display = 'none';
+      }
+      function sweep(){
+        hideBrand('a[href*="elfsight.com/google-reviews-widget"]');
+        hideBrand('a[href*="elfsight.com/instagram-feed-instashow"]');
+      }
+      sweep();
+      new MutationObserver(sweep).observe(document.body, { childList: true, subtree: true });
+      setInterval(sweep, 1000);
+    });
+  </script>
+
+  <!-- Masonry sizing (must match #teamGrid { grid-auto-rows: 4px }) -->
+  <script>
     document.addEventListener('DOMContentLoaded', () => {
       const grid = document.getElementById('teamGrid');
       if (!grid) return;
-  
-      // Read actual row size & gap from computed styles (cross-browser)
+
       const cs  = getComputedStyle(grid);
       const ROW = parseFloat(cs.getPropertyValue('grid-auto-rows')) || 4;
       const GAP = parseFloat(cs.getPropertyValue('row-gap'))        || 0;
-  
+
       const items = [...grid.querySelectorAll('.barber-card')];
-  
+
       function setSpan(el){
         const h = el.getBoundingClientRect().height;
         const rows = Math.ceil((h + GAP) / (ROW + GAP));
         el.style.setProperty('--rows', rows);
       }
-  
-      // Observe size changes (open/close, images, responsive)
+
       const ro = new ResizeObserver(entries => {
         for (const e of entries) setSpan(e.target);
       });
-  
+
       items.forEach(el => {
         el.querySelectorAll('img').forEach(img => {
           if (!img.complete) img.addEventListener('load', () => setSpan(el), { once:true });
@@ -506,67 +610,9 @@
         setSpan(el);
         ro.observe(el);
       });
-  
-      // Safety: recompute on resize
+
       window.addEventListener('resize', () => items.forEach(setSpan));
     });
   </script>
-    <!-- Load Elfsight AFTER both widget containers exist (no async) -->
-  <!-- Load Elfsight AFTER both widget containers exist (no async) -->
-  <script src="https://elfsightcdn.com/platform.js"></script>
-  
-  <script>
-      document.addEventListener("DOMContentLoaded", function() {
-          // Function to target the Elfsight branding link and hide it
-          function removeElfsightBranding() {
-              var elfsightLink = document.querySelector('a[href*="elfsight.com/google-reviews-widget"]');
-              if (elfsightLink) {
-                  // Hide the branding link by setting display to none
-                  elfsightLink.style.display = 'none';
-              }
-          }
-  
-          // Initial check when the DOM content is loaded
-          removeElfsightBranding();
-  
-          // Use MutationObserver to detect when elements are added to the DOM
-          var observer = new MutationObserver(function() {
-              removeElfsightBranding();
-          });
-  
-          // Start observing the body for changes
-          observer.observe(document.body, { childList: true, subtree: true });
-  
-          // Set an interval to check every second to catch dynamic loads
-          setInterval(removeElfsightBranding, 1000);
-      });
-  </script>
-  <script>
-      document.addEventListener("DOMContentLoaded", function() {
-          // Function to target the Elfsight branding link and hide it
-          function removeElfsightBranding() {
-              var elfsightLink = document.querySelector('a[href*="elfsight.com/instagram-feed-instashow"]');
-              if (elfsightLink) {
-                  // Hide the branding link by setting display to none
-                  elfsightLink.style.display = 'none';
-              }
-          }
-  
-          // Initial check when the DOM content is loaded
-          removeElfsightBranding();
-  
-          // Use MutationObserver to detect when elements are added to the DOM
-          var observer = new MutationObserver(function() {
-              removeElfsightBranding();
-          });
-  
-          // Start observing the body for changes
-          observer.observe(document.body, { childList: true, subtree: true });
-  
-          // Set an interval to check every second to catch dynamic loads
-          setInterval(removeElfsightBranding, 1000);
-      });
-  </script>
-
 </body>
 </html>
