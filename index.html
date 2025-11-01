@@ -64,6 +64,13 @@
     }
     .barber-card:hover::after{ opacity:1; }
 
+    
+    /* Mobile-safe full-viewport height for the hero */
+    .hero { height: 100vh; }            /* fallback */
+    @supports (height: 100svh) {
+      .hero { height: 100svh; }         /* iOS/Android safe viewport */
+    }
+    
     /* Accordion */
     .svc-toggle{
       display:flex; align-items:center; justify-content:space-between;
@@ -160,13 +167,13 @@
   <!-- ======================================================= -->
 
   <!-- HERO -->
-  <section id="top" class="relative h-[100vh] md:h-[115vh] min-h-[640px] overflow-hidden grain">
+  <<section id="top" class="hero relative md:h-[115vh] min-h-[640px] overflow-hidden grain pb-14 md:pb-0">
     <div class="absolute inset-0 -z-10">
-      <img
-        src="images/inspirehairstudiomainlogo.png"
-        alt="Three barbers against a minimalist wall at Inspire Hair Studio"
-        class="w-full h-full object-cover"
-        style="object-position:center 12%;" />
+        <img
+          src="images/inspirehairstudiomainlogo.png"
+          alt="Three barbers against a minimalist wall at Inspire Hair Studio"
+          class="w-full h-full object-cover object-[center_20%] md:object-[center_12%]"
+        />
       <!-- subtle dark overlay on small screens to help legibility -->
       <div class="absolute inset-0 bg-black/30 md:bg-transparent"></div>
     </div>
