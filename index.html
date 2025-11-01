@@ -116,76 +116,74 @@
   </div>
 
   <!-- ===================== HEADER (new) ===================== -->
-  <header class="absolute inset-x-0 top-0 z-30 safe-top">
-    <div class="mx-auto max-w-7xl px-4">
-      <div class="h-16 flex items-center justify-between">
-        <!-- Logo / Brand -->
-        <a href="#top" class="flex items-center gap-3">
-          <img src="images/inspirehairstudiomainlogo.png" alt="Inspire Hair Studio" class="h-8 w-auto object-contain">
-          <span class="sr-only">Inspire Hair Studio</span>
-        </a>
+  <!-- HEADER (centered desktop nav; no left logo) -->
+<header class="absolute inset-x-0 top-0 z-30 safe-top">
+  <div class="mx-auto max-w-7xl px-4">
+    <div class="h-16 relative flex items-center">
+      <!-- Desktop nav centered -->
+      <nav class="hidden md:flex absolute inset-x-0 justify-center items-center gap-8 text-sm text-white/80">
+        <a href="#team" class="hover:text-white">our team</a>
+        <a href="#instagram" class="hover:text-white">gallery</a>
+        <a href="#reviews" class="hover:text-white">reviews</a>
+        <a href="#location" class="hover:text-white">location</a>
+        <a href="#contact" class="hover:text-white">contact</a>
+        <a href="#team" class="inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-[#fcf8e6] font-semibold">book now</a>
+      </nav>
 
-        <!-- Desktop nav -->
-        <nav class="hidden md:flex items-center gap-8 text-sm text-white/80">
-          <a href="#team" class="hover:text-white">our team</a>
-          <a href="#instagram" class="hover:text-white">gallery</a>
-          <a href="#reviews" class="hover:text-white">reviews</a>
-          <a href="#location" class="hover:text-white">location</a>
-          <a href="#contact" class="hover:text-white">contact</a>
-          <a href="#team" class="inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-[#fcf8e6] font-semibold">book now</a>
+      <!-- Mobile hamburger (right side) -->
+      <button id="menuBtn"
+              class="md:hidden ml-auto inline-flex items-center justify-center h-10 w-10 rounded-lg ring-1 ring-white/10 bg-black/30 backdrop-blur"
+              aria-label="Open menu" aria-expanded="false">
+        <svg id="menuIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white/90">
+          <line x1="3" y1="6" x2="21" y2="6"></line>
+          <line x1="3" y1="12" x2="21" y2="12"></line>
+          <line x1="3" y1="18" x2="21" y2="18"></line>
+        </svg>
+        <svg id="closeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+             class="hidden text-white/90">
+          <line x1="18" y1="6" x2="6" y2="18"></line>
+          <line x1="6" y1="6" x2="18" y2="18"></line>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobileMenu" class="md:hidden hidden">
+    <div class="mx-auto max-w-7xl px-4 pb-4">
+      <div class="rounded-2xl bg-[var(--card)]/95 ring-1 ring-white/10 backdrop-blur p-4">
+        <nav class="grid gap-2 text-base">
+          <a href="#team" class="px-3 py-2 rounded-lg hover:bg-white/5">our team</a>
+          <a href="#instagram" class="px-3 py-2 rounded-lg hover:bg-white/5">gallery</a>
+          <a href="#reviews" class="px-3 py-2 rounded-lg hover:bg-white/5">reviews</a>
+          <a href="#location" class="px-3 py-2 rounded-lg hover:bg-white/5">location</a>
+          <a href="#contact" class="px-3 py-2 rounded-lg hover:bg-white/5">contact</a>
+          <a href="#team" class="mt-2 inline-flex items-center justify-center rounded-xl bg-[var(--accent)] px-4 py-3 text-[#fcf8e6] font-semibold">book now</a>
         </nav>
-
-        <!-- Mobile hamburger -->
-        <button id="menuBtn"
-                class="md:hidden inline-flex items-center justify-center h-10 w-10 rounded-lg ring-1 ring-white/10 bg-black/30 backdrop-blur"
-                aria-label="Open menu" aria-expanded="false">
-          <!-- 3 lines -->
-          <svg id="menuIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-white/90">
-            <line x1="3" y1="6" x2="21" y2="6"></line>
-            <line x1="3" y1="12" x2="21" y2="12"></line>
-            <line x1="3" y1="18" x2="21" y2="18"></line>
-          </svg>
-          <!-- X icon (hidden by default) -->
-          <svg id="closeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-               stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-               class="hidden text-white/90">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
-          </svg>
-        </button>
       </div>
     </div>
+  </div>
+</header>
 
-    <!-- Mobile menu (hidden by default) -->
-    <div id="mobileMenu" class="md:hidden hidden">
-      <div class="mx-auto max-w-7xl px-4 pb-4">
-        <div class="rounded-2xl bg-[var(--card)]/95 ring-1 ring-white/10 backdrop-blur p-4">
-          <nav class="grid gap-2 text-base">
-            <a href="#team" class="px-3 py-2 rounded-lg hover:bg-white/5">our team</a>
-            <a href="#instagram" class="px-3 py-2 rounded-lg hover:bg-white/5">gallery</a>
-            <a href="#reviews" class="px-3 py-2 rounded-lg hover:bg-white/5">reviews</a>
-            <a href="#location" class="px-3 py-2 rounded-lg hover:bg-white/5">location</a>
-            <a href="#contact" class="px-3 py-2 rounded-lg hover:bg-white/5">contact</a>
-            <a href="#team" class="mt-2 inline-flex items-center justify-center rounded-xl bg-[var(--accent)] px-4 py-3 text-[#fcf8e6] font-semibold">book now</a>
-          </nav>
-        </div>
-      </div>
-    </div>
-  </header>
   <!-- ======================================================= -->
 
-  <!-- was: class="relative h-[100vh] md:h-[115vh] ..." -->
-  <section id="top" class="hero relative md:h-[115vh] min-h-[640px] overflow-hidden grain pb-14 md:pb-0">
+  <section id="top" class="hero relative md:h-[115vh] min-h-[640px] overflow-hidden grain md:pb-0">
     <div class="absolute inset-0 -z-10">
       <img
         src="images/inspirehairstudiomainlogo.png"
         alt="Three barbers against a minimalist wall at Inspire Hair Studio"
-        class="w-full h-full object-contain md:object-cover bg-black object-center md:object-[center_12%]"
+        class="w-full h-full object-cover object-[center_24%] md:object-[center_12%]"
       />
+      <!-- keep overlay if you like; remove next line if you don't need it -->
       <div class="absolute inset-0 bg-black/30 md:bg-transparent"></div>
     </div>
+  
+    <!-- optional scroll hint; remove if you don't want it -->
+    <div class="absolute bottom-6 inset-x-0 flex justify-center text-white/70 text-xs">scroll</div>
   </section>
+
 
 
   <!-- OUR TEAM -->
