@@ -39,10 +39,8 @@
     .elfsight-container [class*="eapps-"] { border-radius: 0.75rem; overflow: hidden; }
 
     
-      /* Safe area + hero helpers */
-    :root{ --vh: 1vh; }                          /* JS will improve this on iOS < 16 */
+      /* Safe area + hero helpers */ 
     .safe-top { padding-top: env(safe-area-inset-top); }
-    .hero { height: calc(var(--vh) * 100); }     /* fallback */
     @supports (height: 100svh) { .hero { height: 100svh; } }
     
     /* Make sure the image truly edge-to-edge (no 1px gaps on some devices) */
@@ -117,7 +115,7 @@
 
   <!-- ===================== HEADER (new) ===================== -->
   <!-- HEADER (centered desktop nav; no left logo) -->
-<header class="absolute inset-x-0 top-0 z-30 safe-top">
+<header class="absolute inset-x-0 top-0 z-30">
   <div class="mx-auto max-w-7xl px-4">
     <div class="h-16 relative flex items-center">
       <!-- Desktop nav centered -->
@@ -130,7 +128,7 @@
         <a href="#team" class="inline-flex items-center rounded-xl bg-[var(--accent)] px-3 py-2 text-[#fcf8e6] font-semibold">book now</a>
       </nav>
 
-      <!-- Mobile hamburger (right side) -->
+      <!-- Mobile hamburger (right) -->
       <button id="menuBtn"
               class="md:hidden ml-auto inline-flex items-center justify-center h-10 w-10 rounded-lg ring-1 ring-white/10 bg-black/30 backdrop-blur"
               aria-label="Open menu" aria-expanded="false">
@@ -141,8 +139,7 @@
           <line x1="3" y1="18" x2="21" y2="18"></line>
         </svg>
         <svg id="closeIcon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-             stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
-             class="hidden text-white/90">
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="hidden text-white/90">
           <line x1="18" y1="6" x2="6" y2="18"></line>
           <line x1="6" y1="6" x2="18" y2="18"></line>
         </svg>
@@ -167,22 +164,18 @@
   </div>
 </header>
 
+
   <!-- ======================================================= -->
 
-  <section id="top" class="hero relative md:h-[115vh] min-h-[640px] overflow-hidden grain md:pb-0">
-    <div class="absolute inset-0 -z-10">
-      <img
-        src="images/inspirehairstudiomainlogo.png"
-        alt="Three barbers against a minimalist wall at Inspire Hair Studio"
-        class="w-full h-full object-cover object-[center_24%] md:object-[center_12%]"
-      />
-      <!-- keep overlay if you like; remove next line if you don't need it -->
-      <div class="absolute inset-0 bg-black/30 md:bg-transparent"></div>
-    </div>
-  
-    <!-- optional scroll hint; remove if you don't want it -->
-    <div class="absolute bottom-6 inset-x-0 flex justify-center text-white/70 text-xs">scroll</div>
-  </section>
+<section id="top" class="relative overflow-hidden grain">
+  <img
+    src="images/inspirehairstudiomainlogo.png"
+    alt="Three barbers against a minimalist wall at Inspire Hair Studio"
+    class="w-full h-auto block object-center"
+  />
+  <!-- optional dark overlay: remove if not needed -->
+  <div class="pointer-events-none absolute inset-0 bg-black/20 md:bg-transparent"></div>
+</section>
 
 
 
