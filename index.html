@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <meta name="description" content="Inspire Hair Studio in Sherman, TX. Book with our barbers, browse our work, read reviews, find our location, and contact us."/>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=League+Spartan:wght@600;800&display=swap" rel="stylesheet">
@@ -38,6 +38,15 @@
     .elfsight-container .eapps-instagram-feed,
     .elfsight-container [class*="eapps-"] { border-radius: 0.75rem; overflow: hidden; }
 
+    
+      /* Safe area + hero helpers */
+    :root{ --vh: 1vh; }                          /* JS will improve this on iOS < 16 */
+    .safe-top { padding-top: env(safe-area-inset-top); }
+    .hero { height: calc(var(--vh) * 100); }     /* fallback */
+    @supports (height: 100svh) { .hero { height: 100svh; } }
+    
+    /* Make sure the image truly edge-to-edge (no 1px gaps on some devices) */
+    .hero img { display:block; }
     /* Card */
     .barber-card{
       position:relative; isolation:isolate; background:var(--card);
@@ -107,7 +116,7 @@
   </div>
 
   <!-- ===================== HEADER (new) ===================== -->
-  <header class="absolute inset-x-0 top-0 z-30">
+  <header class="absolute inset-x-0 top-0 z-30 safe-top">
     <div class="mx-auto max-w-7xl px-4">
       <div class="h-16 flex items-center justify-between">
         <!-- Logo / Brand -->
@@ -166,22 +175,18 @@
   </header>
   <!-- ======================================================= -->
 
-  <!-- HERO -->
-  <<section id="top" class="hero relative md:h-[115vh] min-h-[640px] overflow-hidden grain pb-14 md:pb-0">
+  <!-- was: class="relative h-[100vh] md:h-[115vh] ..." -->
+  <section id="top" class="hero relative md:h-[115vh] min-h-[640px] overflow-hidden grain pb-14 md:pb-0">
     <div class="absolute inset-0 -z-10">
-        <img
-          src="images/inspirehairstudiomainlogo.png"
-          alt="Three barbers against a minimalist wall at Inspire Hair Studio"
-          class="w-full h-full object-cover object-[center_20%] md:object-[center_12%]"
-        />
-      <!-- subtle dark overlay on small screens to help legibility -->
+      <img
+        src="images/inspirehairstudiomainlogo.png"
+        alt="Three barbers against a minimalist wall at Inspire Hair Studio"
+        class="w-full h-full object-contain md:object-cover bg-black object-center md:object-[center_12%]"
+      />
       <div class="absolute inset-0 bg-black/30 md:bg-transparent"></div>
     </div>
-
-    <!-- (old absolute nav removed; header above handles both mobile/desktop) -->
-    <div class="relative mx-auto max-w-7xl px-4 pt-24 md:pt-28"></div>
-    <div class="absolute bottom-6 inset-x-0 flex justify-center text-white/70 text-xs">scroll</div>
   </section>
+
 
   <!-- OUR TEAM -->
   <section id="team" class="mx-auto max-w-7xl px-4 py-16 scroll-mt-24">
